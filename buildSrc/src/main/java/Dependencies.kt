@@ -46,17 +46,17 @@ object Versions {
     val okHttp = "4.2.1"                    // https://github.com/square/okhttp
     val retrofit = "2.6.2"                  // https://github.com/square/retrofit
     val atsl = "1.1.0"
-    val coroutines = "1.3.2"
+    val androidTestRunner = "1.1.2-alpha02"
     val archCoreTest = "2.0.0"
     val dagger = "2.22.1"                   // https://github.com/google/dagger
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
     val mockito = "2.27.0"
-    val mockk = "1.9.2"
     val lifecycle = "2.2.0-beta01"
     val constraintLayout = "1.1.3"
     val material = "1.1.0-beta01"
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.3.0"
+    val androidJunit = "1.1.0"
 }
 
 object KotlinLibraries {
@@ -80,6 +80,7 @@ object Libraries {
     val roomRunTime = "androidx.room:room-runtime:${Versions.room}"
     val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    val roomRX = "androidx.room:room-rxjava2:${Versions.room}"
 
     // Retrofit
     val gson = "com.google.code.gson:gson:${Versions.gson}"
@@ -104,18 +105,15 @@ object Libraries {
 
 object TestLibraries {
     // ANDROID TEST
+    val androidTestRunner = "androidx.test:runner:${Versions.androidTestRunner}"
     val archCoreTest = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
     val atslJunit = "androidx.test.ext:junit:${Versions.atsl}"
     val atslRunner = "androidx.test:runner:${Versions.atsl}"
     val atslRules = "androidx.test:rules:${Versions.atsl}"
+    val junit = "androidx.test.ext:junit:${Versions.androidJunit}"
     // MOCKITO
     val mockCore = "org.mockito:mockito-core:${Versions.mockito}"
     val mockAndroid = "org.mockito:mockito-android:${Versions.mockito}"
-    // MOCK
-    val mockk = "io.mockk:mockk:${Versions.mockk}"
-    val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
-    // COROUTINE
-    val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     // MOCK WEBSERVER
     val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 }
