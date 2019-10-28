@@ -1,0 +1,9 @@
+apply plugin: 'com.android.library'
+apply from: '../android_commons.gradle'
+
+dependencies {
+    implementation project(Modules.commonAndroid)
+    implementation project(Modules.commonDagger)
+
+    implementation Libraries.roomRunTime
+}

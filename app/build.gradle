@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply from: '../android_commons.gradle'
+
+android {
+    defaultConfig {
+        applicationId ApplicationId.id
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "tier"
+
+    productFlavors {
+        dev {
+            dimension "tier"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "Dev core"
+            resConfigs "xxhdpi"
+        }
+        mock {
+            dimension "tier"
+            applicationIdSuffix ".mock"
+            versionNameSuffix "-mock"
+            resValue "string", "app_name", "Mock core"
+            resConfigs "xxhdpi"
+        }
+        prod {
+            dimension "tier"
+            resValue "string", "app_name", "core"
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation project(Modules.core)
+    implementation project(Modules.domain)
+    implementation project(Modules.dataLocal)
+    implementation project(Modules.dataRemote)
+    implementation project(Modules.dataRepository)
+
+    implementation project(Modules.featureSplash)
+    implementation project(Modules.featureHome)
+    implementation project(Modules.featureDetail)
+
+    // DAGGER
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
+    // NETWORK
+    implementation Libraries.retrofit
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.httpLoggingInterceptor
+    // ROOM
+    implementation Libraries.roomRunTime
+    kapt Libraries.roomCompiler
+    implementation Libraries.roomKtx
+}

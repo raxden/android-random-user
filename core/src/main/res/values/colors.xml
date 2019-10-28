@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- theme application colors -->
+
+    <color name="colorPrimary">#018786</color>
+    <color name="colorPrimaryVariant">#018786</color>
+    <color name="colorOnPrimary">#ECEBEA</color>
+    <color name="colorSecondary">#018786</color>
+    <color name="colorSecondaryVariant">#018786</color>
+    <color name="colorOnSecondary">#6F7179</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorControlActivated">#F0404F</color>
+    <color name="colorError">#F0404F</color>
+    <color name="colorOnError">#FFFFFF</color>
+
+    <color name="statusBarColor">#018786</color>
+    <color name="navigationBarColor">#000000</color>
+
+    <!-- application colors -->
+
+    <color name="teal">#018786</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- http://chir.ag/projects/name-that-color/#018786 -->
+
+</resources>

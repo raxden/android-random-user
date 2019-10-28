@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    api KotlinLibraries.kotlin
+    api TestLibraries.coroutine
+    api TestLibraries.archCoreTest
+    api TestLibraries.atslJunit
+    api TestLibraries.atslRules
+    api TestLibraries.atslRunner
+    api TestLibraries.mockk
+    api TestLibraries.mockkAndroid
+    api Libraries.timber
+}

@@ -1,0 +1,13 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    api KotlinLibraries.kotlin
+    api AndroidLibraries.appCompat
+
+    api Libraries.rxAndroid
+    api Libraries.rxKotlin
+
+    api Libraries.gson
+    api Libraries.timber
+}

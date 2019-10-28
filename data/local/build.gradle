@@ -1,0 +1,13 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    implementation project(Modules.commonAndroid)
+
+    // ROOM
+    implementation Libraries.roomRunTime
+    kapt Libraries.roomCompiler
+    implementation Libraries.roomKtx
+    // TEST
+    androidTestImplementation project(Modules.commonTest)
+}

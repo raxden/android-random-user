@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+apply from: '../android_commons.gradle'
+
+android {
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    api project(Modules.commonAndroid)
+    api project(Modules.commonDagger)
+
+    api AndroidLibraries.constraintLayout
+    api AndroidLibraries.material
+
+    // DAGGER
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
+}

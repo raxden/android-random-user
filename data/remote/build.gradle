@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    implementation project(Modules.commonAndroid)
+    // NETWORK
+    implementation Libraries.retrofit
+    implementation Libraries.retrofitRxAdapter
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.httpLoggingInterceptor
+    // TEST
+    testImplementation project(Modules.commonTest)
+    testImplementation TestLibraries.mockWebServer
+}
