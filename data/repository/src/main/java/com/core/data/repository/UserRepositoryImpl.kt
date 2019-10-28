@@ -14,6 +14,7 @@ class UserRepositoryImpl @Inject internal constructor(
 
     override fun list(page: Int, results: Int): Single<List<User>> {
         return gateway.users(page, results)
+            .map { it.distinctBy { entity -> entity.login?.uuid } }
             .map { mapper.transform(it) }
     }
 }
