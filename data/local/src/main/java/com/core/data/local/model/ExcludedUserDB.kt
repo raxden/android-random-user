@@ -3,8 +3,8 @@ package com.core.data.local.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "user")
-data class UserDB(
+@Entity(tableName = "excluded_users")
+data class ExcludedUserDB(
     @PrimaryKey
     var id: String
 )
