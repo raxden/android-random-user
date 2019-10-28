@@ -111,9 +111,6 @@ object TestLibraries {
     // MOCKITO
     val mockCore = "org.mockito:mockito-core:${Versions.mockito}"
     val mockAndroid = "org.mockito:mockito-android:${Versions.mockito}"
-    // MOCK
-    val mockk = "io.mockk:mockk:${Versions.mockk}"
-    val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
     // COROUTINE
     val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     // MOCK WEBSERVER
