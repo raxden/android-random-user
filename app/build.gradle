@@ -7,27 +7,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    flavorDimensions "tier"
-
-    productFlavors {
-        dev {
-            dimension "tier"
-            applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
-            resValue "string", "app_name", "Dev core"
-            resConfigs "xxhdpi"
-        }
-        mock {
-            dimension "tier"
-            applicationIdSuffix ".mock"
-            versionNameSuffix "-mock"
-            resValue "string", "app_name", "Mock core"
-            resConfigs "xxhdpi"
-        }
-        prod {
-            dimension "tier"
-            resValue "string", "app_name", "core"
-        }
+    testOptions {
+        // https://developer.android.com/training/testing/unit-testing/local-unit-tests#include-framework-dependencies
+        unitTests.includeAndroidResources = true
+        // https://developer.android.com/training/testing/unit-testing/local-unit-tests#error-not-mocked
+        unitTests.returnDefaultValues = true
     }
 
     dataBinding {
@@ -58,4 +42,5 @@ dependencies {
     implementation Libraries.roomRunTime
     kapt Libraries.roomCompiler
     implementation Libraries.roomKtx
+    implementation Libraries.roomRX
 }
