@@ -2,11 +2,16 @@ apply plugin: 'com.android.library'
 apply from: '../../android_commons.gradle'
 
 dependencies {
+    implementation Libraries.rxAndroid
+    implementation Libraries.rxKotlin
+
     api KotlinLibraries.kotlin
-    api TestLibraries.coroutine
+    api TestLibraries.mockCore
+    api TestLibraries.mockAndroid
     api TestLibraries.archCoreTest
     api TestLibraries.atslJunit
     api TestLibraries.atslRules
     api TestLibraries.atslRunner
+    api TestLibraries.junit
     api Libraries.timber
 }
