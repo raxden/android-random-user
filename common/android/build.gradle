@@ -9,5 +9,6 @@ dependencies {
     api Libraries.rxKotlin
 
     api Libraries.gson
+    api Libraries.threetenabp
     api Libraries.timber
 }

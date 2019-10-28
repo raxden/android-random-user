@@ -49,6 +49,7 @@ object Versions {
     val androidTestRunner = "1.1.2-alpha02"
     val archCoreTest = "2.0.0"
     val dagger = "2.22.1"                   // https://github.com/google/dagger
+    val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
     val mockito = "2.27.0"
     val lifecycle = "2.2.0-beta01"
@@ -101,6 +102,9 @@ object Libraries {
 
     // Timber
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    // Threetenabp
+    val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
 }
 
 object TestLibraries {

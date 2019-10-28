@@ -27,4 +27,10 @@ android {
     androidExtensions {
         experimental = true
     }
+    testOptions {
+        // https://developer.android.com/training/testing/unit-testing/local-unit-tests#include-framework-dependencies
+        unitTests.includeAndroidResources = true
+        // https://developer.android.com/training/testing/unit-testing/local-unit-tests#error-not-mocked
+        unitTests.returnDefaultValues = true
+    }
 }

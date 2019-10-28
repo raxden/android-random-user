@@ -1,5 +1,6 @@
 package com.core.data.repository
 
+import android.net.Uri
 import com.core.common.test.BaseTest
 import com.core.data.local.dao.ExcludedUserDao
 import com.core.data.local.model.ExcludedUserDB
@@ -7,6 +8,7 @@ import com.core.data.remote.AppGateway
 import com.core.data.remote.entity.LoginEntity
 import com.core.data.remote.entity.UserEntity
 import com.core.data.repository.mapper.UserEntityDataMapper
+import com.core.domain.Gender
 import com.core.domain.User
 import io.reactivex.Single
 import org.junit.Before
@@ -15,8 +17,10 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
+import org.threeten.bp.LocalDateTime
 
 class UserRepositoryTest : BaseTest() {
 
@@ -42,8 +46,34 @@ class UserRepositoryTest : BaseTest() {
     )
 
     var result = listOf(
-        User("3"),
-        User("5")
+        User(
+            "3",
+            "",
+            "",
+            "",
+            mock(Uri::class.java),
+            mock(Uri::class.java),
+            "",
+            Gender.MALE,
+            "",
+            "",
+            "",
+            null
+        ),
+        User(
+            "5",
+            "",
+            "",
+            "",
+            mock(Uri::class.java),
+            mock(Uri::class.java),
+            "",
+            Gender.MALE,
+            "",
+            "",
+            "",
+            null
+        )
     )
 
     lateinit var userRepository: UserRepositoryImpl
