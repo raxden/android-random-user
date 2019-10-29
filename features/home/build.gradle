@@ -11,6 +11,10 @@ dependencies {
     implementation project(Modules.navigation)
     implementation project(Modules.domain)
     implementation project(Modules.core)
+    implementation project(Modules.commonAndroid)
+
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.recyclerView
 
     // DAGGER
     implementation Libraries.daggerAndroid

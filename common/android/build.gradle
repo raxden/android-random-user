@@ -4,6 +4,7 @@ apply from: '../../android_commons.gradle'
 dependencies {
     api KotlinLibraries.kotlin
     api AndroidLibraries.appCompat
+    api AndroidLibraries.recyclerView
 
     api Libraries.rxAndroid
     api Libraries.rxKotlin

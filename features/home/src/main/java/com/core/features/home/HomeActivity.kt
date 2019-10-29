@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.core.activity.BaseFragmentActivity
 import com.core.common.android.extensions.getExtras
 import com.core.features.home.databinding.HomeActivityBinding
-import com.core.features.splash.BR
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
 import javax.inject.Inject
 
