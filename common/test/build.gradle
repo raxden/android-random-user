@@ -12,6 +12,7 @@ dependencies {
     api TestLibraries.atslJunit
     api TestLibraries.atslRules
     api TestLibraries.atslRunner
-    api TestLibraries.junit
+    api TestLibraries.robolectric
+    api Libraries.threetenabp
     api Libraries.timber
 }
