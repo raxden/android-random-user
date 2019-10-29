@@ -28,6 +28,7 @@ dependencies {
     kapt Libraries.daggerProcessor
     // NETWORK
     implementation Libraries.retrofit
+    implementation Libraries.retrofitRxAdapter
     implementation Libraries.retrofitGsonConverter
     implementation Libraries.httpLoggingInterceptor
     // ROOM

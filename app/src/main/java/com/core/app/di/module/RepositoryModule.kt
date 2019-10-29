@@ -11,13 +11,5 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    internal abstract fun accountRepository(repository: AccountRepositoryImpl): AccountRepository
-
-    @Binds
-    @Singleton
-    internal abstract fun projectRepository(repository: ProjectRepositoryImpl): ProjectRepository
-
-    @Binds
-    @Singleton
     internal abstract fun userRepository(repository: UserRepositoryImpl): UserRepository
 }

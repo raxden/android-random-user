@@ -1,6 +1,19 @@
 apply plugin: 'com.android.library'
 apply from: '../../android_commons.gradle'
 
-dependencies {
+android {
+    dataBinding {
+        enabled true
+    }
+}
 
+dependencies {
+    implementation project(Modules.navigation)
+    implementation project(Modules.domain)
+    implementation project(Modules.core)
+
+    // DAGGER
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
 }
