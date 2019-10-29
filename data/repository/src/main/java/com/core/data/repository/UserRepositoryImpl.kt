@@ -8,7 +8,6 @@ import com.core.data.repository.mapper.UserEntityDataMapper
 import com.core.domain.User
 import com.core.domain.repository.UserRepository
 import io.reactivex.Completable
-import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers

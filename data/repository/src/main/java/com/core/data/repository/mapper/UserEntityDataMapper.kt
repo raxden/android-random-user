@@ -1,6 +1,5 @@
 package com.core.data.repository.mapper
 
-import android.net.Uri
 import com.core.common.android.DataMapper
 import com.core.common.android.extensions.toLocalDateTime
 import com.core.data.remote.entity.UserEntity
@@ -18,8 +17,8 @@ class UserEntityDataMapper @Inject constructor() : DataMapper<UserEntity, User>(
         name = source.name?.first ?: "",
         surname = source.name?.last ?: "",
         email = source.email ?: "",
-        picture = Uri.parse(source.picture?.large ?: ""),
-        thumbnail = Uri.parse(source.picture?.thumbnail ?: ""),
+        picture = source.picture?.large ?: "",
+        thumbnail = source.picture?.thumbnail ?: "",
         phone = source.phone ?: "",
         gender = when (source.gender) {
             "male" -> Gender.MALE

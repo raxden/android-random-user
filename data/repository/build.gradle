@@ -16,4 +16,5 @@ dependencies {
 
     // TEST
     testImplementation project(Modules.commonTest)
+    testImplementation Libraries.threetenabp
 }
