@@ -4,9 +4,9 @@ import android.content.Context
 import com.core.app.BuildConfig
 import com.core.app.R
 import com.core.data.remote.AppGateway
+import com.core.data.remote.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
 import com.core.data.remote.retrofit.AppRetrofitGateway
 import com.core.data.remote.retrofit.service.AppRetrofitService
-import com.core.data.remote.stream.AppFileStreamGateway
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -14,9 +14,9 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -28,8 +28,7 @@ object RemoteModule {
     @JvmStatic
     @Provides
     @Singleton
-    @Named("excludeFieldsWithoutExposeAnnotation")
-    internal fun excludeFieldsWithoutExposeAnnotationGson(): Gson {
+    internal fun gson(): Gson {
         return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
     }
 
@@ -79,11 +78,13 @@ object RemoteModule {
     internal fun retrofit(
         context: Context,
         httpClient: OkHttpClient,
-        @Named("excludeFieldsWithoutExposeAnnotation") gson: Gson
+        gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(context.getString(R.string.data_api_domain))
             .client(httpClient)
+            .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
@@ -103,12 +104,8 @@ object RemoteModule {
     @Provides
     @Singleton
     internal fun appGateway(
-        @Named("excludeFieldsWithoutExposeAnnotation") gson: Gson,
         service: AppRetrofitService
     ): AppGateway {
-        return when {
-            BuildConfig.FLAVOR == "mock" -> AppFileStreamGateway(gson)
-            else -> AppRetrofitGateway(service)
-        }
+        return AppRetrofitGateway(service)
     }
 }

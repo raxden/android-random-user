@@ -1,7 +1,7 @@
-package com.core.features.splash
+package com.core.features.detail
 
 import com.core.BaseViewModel
 import javax.inject.Inject
 
-class SplashViewModel @Inject constructor(
+class DetailViewModel @Inject constructor(
 ) : BaseViewModel()
