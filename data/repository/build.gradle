@@ -8,6 +8,11 @@ dependencies {
     implementation project(Modules.dataLocal)
     implementation project(Modules.domain)
 
+    // DAGGER
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
+
     // ROOM
     implementation Libraries.roomRunTime
     kapt Libraries.roomCompiler

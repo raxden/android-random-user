@@ -3,7 +3,7 @@ package com.core.features.detail.di
 import android.app.Activity
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import com.core.ViewModelKey
+import com.core.common.dagger.ViewModelKey
 import com.core.activity.BaseActivityModule
 import com.core.features.detail.DetailActivity
 import com.core.features.detail.DetailFragment

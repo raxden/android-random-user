@@ -1,13 +1,21 @@
 apply plugin: 'com.android.library'
 apply from: '../../android_commons.gradle'
 
+android {
+    dataBinding {
+        enabled true
+    }
+}
+
 dependencies {
     api KotlinLibraries.kotlin
-    api AndroidLibraries.appCompat
-    api AndroidLibraries.recyclerView
+    api AndroidLibraries.material
 
     api Libraries.rxAndroid
     api Libraries.rxKotlin
+
+    implementation Libraries.glide
+    kapt Libraries.glideCompiler
 
     api Libraries.gson
     api Libraries.threetenabp

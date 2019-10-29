@@ -13,9 +13,6 @@ dependencies {
     implementation project(Modules.core)
     implementation project(Modules.commonAndroid)
 
-    implementation AndroidLibraries.appCompat
-    implementation AndroidLibraries.recyclerView
-
     // DAGGER
     implementation Libraries.daggerAndroid
     kapt Libraries.daggerCompiler

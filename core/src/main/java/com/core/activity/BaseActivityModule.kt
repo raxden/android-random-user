@@ -3,7 +3,7 @@ package com.core.activity
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.core.ViewModelProviderFactory
+import com.core.common.dagger.ViewModelProviderFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

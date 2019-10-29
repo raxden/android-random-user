@@ -4,7 +4,6 @@ apply from: '../android_commons.gradle'
 android {
     defaultConfig {
         applicationId ApplicationId.id
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
         enabled true

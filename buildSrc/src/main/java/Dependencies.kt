@@ -38,8 +38,6 @@ object Versions {
     val compileSdk = 28
     val targetSdk = 28
     val kotlin = "1.3.50"
-    val appCompat = "1.1.0-rc01"
-    val recyclerview = "1.0.0"
     val gradle = "3.5.1"
     val fabric = "1.28.1"
     val room = "2.2.0"                      // https://developer.android.com/jetpack/androidx/releases/room
@@ -51,10 +49,11 @@ object Versions {
     val dagger = "2.22.1"                   // https://github.com/google/dagger
     val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
+    val glide = "4.9.0"                     // https://github.com/bumptech/glide
     val mockito = "2.7.1"
     val lifecycle = "2.2.0-beta01"
     val constraintLayout = "1.1.3"
-    val material = "1.1.0-beta01"
+    val material = "1.1.0-alpha07"
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.3.0"
     val robolectric = "4.2.1"
@@ -66,8 +65,6 @@ object KotlinLibraries {
 
 object AndroidLibraries {
     // ANDROID
-    val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-    val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val material = "com.google.android.material:material:${Versions.material}"
 }
@@ -100,6 +97,10 @@ object Libraries {
     val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+
+    // Glide
+    val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     // Timber
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"

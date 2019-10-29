@@ -8,6 +8,7 @@ import com.core.data.repository.mapper.UserEntityDataMapper
 import com.core.domain.User
 import com.core.domain.repository.UserRepository
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
@@ -19,7 +20,7 @@ class UserRepositoryImpl @Inject internal constructor(
     private val mapper: UserEntityDataMapper
 ) : UserRepository {
 
-    override fun list(page: Int, results: Int): Single<List<User>> {
+    override fun list(page: Int, results: Int): Maybe<List<User>> {
         return Single.zip(
             gateway.users(page, results)
                 .map { it.distinctBy { entity -> entity.login?.uuid } }
@@ -31,7 +32,7 @@ class UserRepositoryImpl @Inject internal constructor(
                     excludedUsers.find { it.id == user.login?.uuid }?.let { false } ?: true
                 })
             }
-        )
+        ).filter { it.isNotEmpty() }
     }
 
     override fun exclude(user: User): Completable {
