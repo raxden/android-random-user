@@ -1,5 +1,5 @@
 object ApplicationId {
-    val id = "com.core.app"
+    val id = "com.randomuser.app"
 }
 
 object Modules {
@@ -39,6 +39,7 @@ object Versions {
     val targetSdk = 28
     val kotlin = "1.3.50"
     val appCompat = "1.1.0-rc01"
+    val recyclerview = "1.0.0"
     val gradle = "3.5.1"
     val fabric = "1.28.1"
     val room = "2.2.0"                      // https://developer.android.com/jetpack/androidx/releases/room
@@ -46,17 +47,17 @@ object Versions {
     val okHttp = "4.2.1"                    // https://github.com/square/okhttp
     val retrofit = "2.6.2"                  // https://github.com/square/retrofit
     val atsl = "1.1.0"
-    val androidTestRunner = "1.1.2-alpha02"
     val archCoreTest = "2.0.0"
     val dagger = "2.22.1"                   // https://github.com/google/dagger
+    val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
-    val mockito = "2.27.0"
+    val mockito = "2.7.1"
     val lifecycle = "2.2.0-beta01"
     val constraintLayout = "1.1.3"
     val material = "1.1.0-beta01"
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.3.0"
-    val androidJunit = "1.1.0"
+    val robolectric = "4.2.1"
 }
 
 object KotlinLibraries {
@@ -66,6 +67,7 @@ object KotlinLibraries {
 object AndroidLibraries {
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
+    val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val material = "com.google.android.material:material:${Versions.material}"
 }
@@ -101,19 +103,22 @@ object Libraries {
 
     // Timber
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    // Threetenabp
+    val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
 }
 
 object TestLibraries {
     // ANDROID TEST
-    val androidTestRunner = "androidx.test:runner:${Versions.androidTestRunner}"
     val archCoreTest = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
     val atslJunit = "androidx.test.ext:junit:${Versions.atsl}"
     val atslRunner = "androidx.test:runner:${Versions.atsl}"
     val atslRules = "androidx.test:rules:${Versions.atsl}"
-    val junit = "androidx.test.ext:junit:${Versions.androidJunit}"
     // MOCKITO
     val mockCore = "org.mockito:mockito-core:${Versions.mockito}"
     val mockAndroid = "org.mockito:mockito-android:${Versions.mockito}"
     // MOCK WEBSERVER
     val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
+
+    val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 }

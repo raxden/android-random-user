@@ -1,14 +1,5 @@
 package com.core.data.remote.entity
 
-/**
-User name and surname.
-User email.
-User picture.
-User phone.
-User gender.
-User location: street, city and state.
-Registered date.
- */
 data class UserEntity(
     var gender: String? = null,
     var name: NameEntity? = null,
@@ -27,26 +18,26 @@ data class NameEntity(
 )
 
 data class LocationEntity(
-    var street: Street? = null,
+    var street: StreetEntity? = null,
     var city: String? = null,
     var state: String? = null,
     var county: String? = null,
     var postcode: String? = null,
-    var coordinates: Coordinates? = null,
-    var timezone: Timezone? = null
+    var coordinates: CoordinatesEntity? = null,
+    var timezone: TimezoneEntity? = null
 )
 
-data class Street(
+data class StreetEntity(
     var number: Int? = null,
     var name: String? = null
 )
 
-data class Coordinates(
+data class CoordinatesEntity(
     var latitude: String? = null,
     var longitude: String? = null
 )
 
-data class Timezone(
+data class TimezoneEntity(
     var offset: String? = null,
     var description: String? = null
 )

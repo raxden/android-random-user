@@ -1,29 +1,27 @@
-package com.core.features.splash
+package com.core.features.home
 
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.core.activity.BaseFragmentActivity
-import com.core.common.android.Status
 import com.core.common.android.extensions.getExtras
-import com.core.features.splash.databinding.SplashActivityBinding
+import com.core.features.home.databinding.HomeActivityBinding
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
 import javax.inject.Inject
 
-class SplashActivity : BaseFragmentActivity<SplashActivityBinding>(),
-    InjectFragmentActivityLifecycle.Callback<SplashFragment> {
+class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
+    InjectFragmentActivityLifecycle.Callback<HomeFragment> {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel: SplashViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(SplashViewModel::class.java)
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
     }
 
     override val layoutId: Int
-        get() = R.layout.splash_activity
+        get() = R.layout.home_activity
 
-    override fun onBindingCreated(binding: SplashActivityBinding) {
+    override fun onBindingCreated(binding: HomeActivityBinding) {
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()
     }
@@ -37,7 +35,7 @@ class SplashActivity : BaseFragmentActivity<SplashActivityBinding>(),
 
     override fun onLoadFragmentContainer(): View = binding.contentView
 
-    override fun onCreateFragment(): SplashFragment = SplashFragment.newInstance(getExtras())
+    override fun onCreateFragment(): HomeFragment = HomeFragment.newInstance(getExtras())
 
-    override fun onFragmentLoaded(fragment: SplashFragment) {}
+    override fun onFragmentLoaded(fragment: HomeFragment) {}
 }

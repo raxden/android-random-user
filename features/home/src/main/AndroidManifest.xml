@@ -1,2 +1,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.core.features.home" />
+    package="com.core.features.home">
+
+    <application>
+        <activity android:name=".HomeActivity"
+            android:theme="@style/AppTheme.Home">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+
+<!--                <data-->
+<!--                    android:host="randomuser"-->
+<!--                    android:pathPrefix="/home"-->
+<!--                    android:scheme="app" />-->
+<!--            </intent-filter>-->
+        </activity>
+    </application>
+
+</manifest>

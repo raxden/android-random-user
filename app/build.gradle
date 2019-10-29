@@ -6,14 +6,6 @@ android {
         applicationId ApplicationId.id
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    testOptions {
-        // https://developer.android.com/training/testing/unit-testing/local-unit-tests#include-framework-dependencies
-        unitTests.includeAndroidResources = true
-        // https://developer.android.com/training/testing/unit-testing/local-unit-tests#error-not-mocked
-        unitTests.returnDefaultValues = true
-    }
-
     dataBinding {
         enabled true
     }
@@ -36,6 +28,7 @@ dependencies {
     kapt Libraries.daggerProcessor
     // NETWORK
     implementation Libraries.retrofit
+    implementation Libraries.retrofitRxAdapter
     implementation Libraries.retrofitGsonConverter
     implementation Libraries.httpLoggingInterceptor
     // ROOM
