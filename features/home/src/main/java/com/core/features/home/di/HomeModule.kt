@@ -9,6 +9,7 @@ import com.core.features.home.HomeActivity
 import com.core.features.home.HomeFragment
 import com.core.features.home.HomeViewModel
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
+import com.core.lifecycle.activity.ToolbarActivityLifecycle
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -31,6 +32,12 @@ abstract class HomeModule {
         @IntoSet
         internal abstract fun injectFragment(
             lifecycleObserver: InjectFragmentActivityLifecycle<HomeFragment>
+        ): LifecycleObserver
+
+        @Binds
+        @IntoSet
+        internal abstract fun toolbar(
+            lifecycleObserver: ToolbarActivityLifecycle
         ): LifecycleObserver
 
         @Binds
