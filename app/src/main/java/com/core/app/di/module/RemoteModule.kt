@@ -29,7 +29,7 @@ object RemoteModule {
     @Provides
     @Singleton
     internal fun gson(): Gson {
-        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+        return GsonBuilder().create()
     }
 
     @JvmStatic
