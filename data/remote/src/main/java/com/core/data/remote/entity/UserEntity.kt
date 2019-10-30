@@ -21,7 +21,7 @@ data class LocationEntity(
     var street: StreetEntity? = null,
     var city: String? = null,
     var state: String? = null,
-    var county: String? = null,
+    var country: String? = null,
     var postcode: String? = null,
     var coordinates: CoordinatesEntity? = null,
     var timezone: TimezoneEntity? = null
