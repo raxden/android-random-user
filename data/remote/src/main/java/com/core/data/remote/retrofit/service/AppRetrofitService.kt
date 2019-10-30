@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface AppRetrofitService {
 
-    @GET("/?inc=name,email,picture,phone,gender,location,registered,login")
+    @GET("?inc=name,email,picture,phone,gender,location,registered,login")
     fun users(
         @Query("page") page: Int,
         @Query("results") results: Int
