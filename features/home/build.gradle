@@ -12,6 +12,7 @@ dependencies {
     implementation project(Modules.domain)
     implementation project(Modules.core)
     implementation project(Modules.commonAndroid)
+    implementation project(Modules.featureCommon)
 
     // DAGGER
     implementation Libraries.daggerAndroid

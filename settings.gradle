@@ -1,2 +1,2 @@
-include ':app', ':navigation', ':buildSrc', ':data:remote', ':data:local', ':data:repository', ':features:splash', ':features:home', ':features:detail', ':common:test', ':domain', ':common:android', ':common:dagger', ':core'
+include ':app', ':navigation', ':buildSrc', ':data:remote', ':data:local', ':data:repository', ':features:splash', ':features:home', ':features:detail', ':common:test', ':domain', ':common:android', ':common:dagger', ':core', ':features:common'
 rootProject.name='android-core'

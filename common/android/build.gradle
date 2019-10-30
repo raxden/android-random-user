@@ -14,7 +14,7 @@ dependencies {
     api Libraries.rxAndroid
     api Libraries.rxKotlin
 
-    implementation Libraries.glide
+    api Libraries.glide
     kapt Libraries.glideCompiler
 
     api Libraries.gson

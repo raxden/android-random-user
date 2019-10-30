@@ -19,6 +19,7 @@ object Modules {
     val dataModel = ":data:model"
     val dataRepository = ":data:repository"
 
+    val featureCommon = ":features:common"
     val featureSplash = ":features:splash"
     val featureLogin = ":features:login"
     val featureHome = ":features:home"
