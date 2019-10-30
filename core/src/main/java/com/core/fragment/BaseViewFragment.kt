@@ -18,6 +18,7 @@ abstract class BaseViewFragment<VDB : ViewDataBinding>
             this.binding = binding
             binding.lifecycleOwner = viewLifecycleOwner    // Layout requirement to listen any changes on LiveData values
             onBindingCreated(binding)
+            binding.executePendingBindings()
             binding.root
         }
     }

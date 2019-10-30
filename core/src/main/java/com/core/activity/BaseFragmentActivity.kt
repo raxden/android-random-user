@@ -17,6 +17,7 @@ abstract class BaseFragmentActivity<VDB : ViewDataBinding> : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
         onBindingCreated(binding)
+        binding.executePendingBindings()
     }
 
     abstract fun onBindingCreated(binding: VDB)
