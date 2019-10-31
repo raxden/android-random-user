@@ -1,13 +1,18 @@
 package com.core.features.home
 
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.core.activity.BaseFragmentActivity
 import com.core.common.android.extensions.getExtras
 import com.core.features.home.databinding.HomeActivityBinding
+import com.core.features.home.view.FilterBottomSheetDialog
+import com.core.features.home.view.FilterView
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.lifecycle.activity.ToolbarActivityLifecycle
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
 class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
@@ -23,6 +28,18 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
 
     override val layoutId: Int
         get() = R.layout.home_activity
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_toolbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.filter -> showFilterView()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onBindingCreated(binding: HomeActivityBinding) {
         binding.setVariable(BR.viewModel, viewModel)
@@ -46,4 +63,10 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
     override fun onCreateFragment(): HomeFragment = HomeFragment.newInstance(getExtras())
 
     override fun onFragmentLoaded(fragment: HomeFragment) {}
+
+    // =============================================================================================
+
+    private fun showFilterView() {
+        FilterBottomSheetDialog(this, viewModel).show()
+    }
 }
