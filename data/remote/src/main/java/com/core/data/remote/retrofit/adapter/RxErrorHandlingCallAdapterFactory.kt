@@ -1,4 +1,4 @@
-package com.core.data.remote.gateway.retrofit.adapter
+package com.core.data.remote.retrofit.adapter
 
 import com.core.data.remote.retrofit.exception.RetrofitException
 import io.reactivex.*
@@ -16,7 +16,10 @@ class RxErrorHandlingCallAdapterFactory private constructor() : CallAdapter.Fact
     private val original: RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
 
     override fun get(returnType: Type, annotations: Array<Annotation>, retrofit: Retrofit): CallAdapter<*, *>? {
-        return RxCallAdapterWrapper(retrofit, original.get(returnType, annotations, retrofit))
+        return RxCallAdapterWrapper(
+            retrofit,
+            original.get(returnType, annotations, retrofit)
+        )
     }
 
     private class RxCallAdapterWrapper<R>(private val retrofit: Retrofit, private val wrapped: CallAdapter<R, *>?) : CallAdapter<R, Any> {

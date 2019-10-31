@@ -5,7 +5,7 @@ import com.core.data.remote.entity.UserEntity
 import io.reactivex.Single
 import retrofit2.http.*
 
-interface AppRetrofitService {
+interface UserService {
 
     @GET("?inc=name,email,picture,phone,gender,location,registered,login")
     fun users(
