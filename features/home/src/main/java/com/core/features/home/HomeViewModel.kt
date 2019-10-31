@@ -14,18 +14,24 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import com.core.common.android.extensions.notifyObservers
+import com.core.features.home.usecase.ExcludeUserUseCase
 
 class HomeViewModel @Inject constructor(
-    private val getUsersPagedUseCase: GetUsersPagedUseCase
+    private val getUsersPagedUseCase: GetUsersPagedUseCase,
+    private val excludeUserUseCase: ExcludeUserUseCase
 ) : BaseViewModel() {
 
     private val mUsers = MutableLiveData<MutableList<UserModel>>()
     val users: LiveData<MutableList<UserModel>> = mUsers
 
+    private val mLoading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = mLoading
+
     private val mPager = Pager<User>(1, 20)
 
     init {
         mUsers.value = mutableListOf()
+        mLoading.value = true
         loadUsers(mPager)
     }
 
@@ -35,6 +41,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun refreshContent() {
+        mUsers.value?.clear()
+        mUsers.notifyObservers()
+        mLoading.value = true
         loadUsers(mPager.restart())
     }
 
@@ -43,8 +52,24 @@ class HomeViewModel @Inject constructor(
         loadUsers(mPager.next())
     }
 
-    fun onItemSelected(position: Int) {
+    fun onItemSelected(item: UserModel) {
 
+    }
+
+    fun onItemRemoved(item: UserModel) {
+        excludeUserUseCase.execute(item.id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onComplete = {
+                    mUsers.value?.remove(item)
+                    mUsers.notifyObservers()
+                },
+                onError = {
+                    mThrowable.value = Event(it)
+                }
+            )
+            .addTo(mCompositeDisposable)
     }
 
     private fun loadUsers(pager: Pager<User>) {
@@ -56,9 +81,11 @@ class HomeViewModel @Inject constructor(
                 onSuccess = { data ->
                     mUsers.value?.addAll(data)
                     mUsers.notifyObservers()
+                    mLoading.value = false
                 },
                 onError = {
                     mThrowable.value = Event(it)
+                    mLoading.value = false
                 }
             )
             .addTo(mCompositeDisposable)

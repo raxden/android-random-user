@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
         app:item="@{item}"
-        bind:onSafeClick="@{()-> viewModel.onItemSelected(position)}" />
+        app:setOnRemoveClickListener="@{(view) -> viewModel.onItemRemoved(item)}"
+        bind:onSafeClick="@{()-> viewModel.onItemSelected(item)}" />
 
 </layout>
