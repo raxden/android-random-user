@@ -1,7 +1,5 @@
 package com.core.common.android
 
-import timber.log.Timber
-
 class Pager<T> constructor(
         private var page: Int = 0,
         private var pageSize: Int = 50
@@ -37,13 +35,6 @@ class Pager<T> constructor(
         return this
     }
 
-    fun restart(): Pager<T> {
-        page = initPage
-        pageData.clear()
-        moreResults = true
-        return this
-    }
-
     fun clear(): Pager<T> {
         page = initPage
         pageData.clear()
@@ -57,7 +48,6 @@ class Pager<T> constructor(
 
     fun setRequestPage(value: Boolean) {
         pageLoading[page] = value
-        Timber.d("PAGER: setRequestPage $value")
     }
 
     fun currentPage() = page
