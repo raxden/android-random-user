@@ -1,7 +1,9 @@
 package com.core.features.home
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import com.core.features.home.adapter.HomeListAdapter
 import com.core.features.home.databinding.HomeFragmentBinding
 import com.core.features.home.model.UserModel
 import com.core.fragment.BaseViewFragment
+import timber.log.Timber
 import javax.inject.Inject
 
 class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {
@@ -52,7 +55,7 @@ class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.users.observe(viewLifecycleOwner, Observer {
+        viewModel.getResults().users.observe(viewLifecycleOwner, Observer {
             homeListAdapter.submitList(it.toList())
         })
     }

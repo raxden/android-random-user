@@ -35,9 +35,36 @@
                 android:paddingLeft="12dp"
                 android:paddingTop="12dp"
                 android:paddingRight="12dp"
-                android:paddingBottom="60dp" />
+                android:paddingBottom="60dp"
+                tools:itemCount="5"
+                tools:listitem="@layout/user_list_item_view" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/info_empty_view"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:tint="@color/lightGray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/swipe_refresh_layout"
+            app:srcCompat="@drawable/ic_info_outline_black_24dp"
+            bind:visibleGone="@{viewModel.results.users.isEmpty()}"
+            tools:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/info_empty_text_view"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_empty_results"
+            app:layout_constraintEnd_toEndOf="@+id/info_empty_view"
+            app:layout_constraintStart_toStartOf="@+id/info_empty_view"
+            app:layout_constraintTop_toBottomOf="@+id/info_empty_view"
+            bind:visibleGone="@{viewModel.results.users.isEmpty()}"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

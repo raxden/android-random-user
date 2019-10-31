@@ -21,8 +21,7 @@ class HomeViewModel @Inject constructor(
     private val excludeUserUseCase: ExcludeUserUseCase
 ) : BaseViewModel() {
 
-    private val mUsers = MutableLiveData<MutableList<UserModel>>()
-    val users: LiveData<MutableList<UserModel>> = mUsers
+    private val mFilterResults = FilterResults()
 
     private val mLoading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = mLoading
@@ -30,7 +29,6 @@ class HomeViewModel @Inject constructor(
     private val mPager = Pager<User>(1, 20)
 
     init {
-        mUsers.value = mutableListOf()
         mLoading.value = true
         loadUsers(mPager)
     }
@@ -40,11 +38,12 @@ class HomeViewModel @Inject constructor(
         super.onCleared()
     }
 
+    fun getResults() = mFilterResults
+
     fun refreshContent() {
-        mUsers.value?.clear()
-        mUsers.notifyObservers()
+        mFilterResults.clearData()
         mLoading.value = true
-        loadUsers(mPager.restart())
+        loadUsers(mPager.clear())
     }
 
     fun loadMoreUsers() {
@@ -62,8 +61,7 @@ class HomeViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onComplete = {
-                    mUsers.value?.remove(item)
-                    mUsers.notifyObservers()
+                    mFilterResults.removeData(item)
                 },
                 onError = {
                     mThrowable.value = Event(it)
@@ -79,8 +77,7 @@ class HomeViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { data ->
-                    mUsers.value?.addAll(data)
-                    mUsers.notifyObservers()
+                    mFilterResults.addData(data)
                     mLoading.value = false
                 },
                 onError = {
