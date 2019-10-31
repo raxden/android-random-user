@@ -3,6 +3,7 @@ package com.core.features.home.view
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
+import com.core.common.android.extensions.setSafeOnClickListener
 import com.core.component.BaseComponentBindingView
 import com.core.features.home.R
 import com.core.features.home.databinding.UserListItemViewBinding
@@ -24,6 +25,10 @@ class UserListItemView @JvmOverloads constructor(
     override fun onLoadStyledAttributes(attrs: TypedArray) {}
 
     override fun onBindingCreated(binding: UserListItemViewBinding) {}
+
+    fun setOnRemoveClickListener(listener: OnClickListener) {
+        mBinding.removeView.setSafeOnClickListener { listener.onClick(it) }
+    }
 
     fun setItem(item: UserModel) {
         mBinding.item = item

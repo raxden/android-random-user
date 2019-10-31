@@ -12,13 +12,21 @@ class GetUsersPagedUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
 
+    private val ids: MutableSet<String> = mutableSetOf()
+
     fun execute(pager: Pager<User>): Single<Pager<User>> {
         return userRepository.list(pager.currentPage(), pager.pageSize())
-            .map {
-                it.distinctBy { item -> item.id }
+            .map { it.toMutableList() }
+            .map { list ->
+                list.removeAll { user -> ids.contains(user.id) }
+                list
+            }
+            .map { list ->
+                ids.addAll(list.map { it.id })
+                list
             }
             .map {
-                pager.addPageData(data = it.toMutableList())
+                pager.addPageData(data = it)
             }
             .doOnSubscribe {
                 pager.setRequestPage(true)
