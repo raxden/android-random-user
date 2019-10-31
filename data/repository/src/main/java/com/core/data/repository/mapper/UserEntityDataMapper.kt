@@ -21,7 +21,7 @@ class UserEntityDataMapper @Inject constructor() : DataMapper<UserEntity, User>(
         email = source.email ?: "",
         picture = Picture(
             source.picture?.large ?: "",
-            source.picture?.thumbnail ?: ""
+            source.picture?.medium?: ""
         ),
         phone = source.phone ?: "",
         gender = when (source.gender) {
