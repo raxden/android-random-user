@@ -15,6 +15,9 @@ class GetUsersPagedUseCase @Inject constructor(
     fun execute(pager: Pager<User>): Single<Pager<User>> {
         return userRepository.list(pager.currentPage(), pager.pageSize())
             .map {
+                it.distinctBy { item -> item.id }
+            }
+            .map {
                 pager.addPageData(data = it.toMutableList())
             }
             .doOnSubscribe {
