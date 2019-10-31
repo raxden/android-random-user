@@ -11,8 +11,21 @@ data class User(
     var phone: String,
     var gender: Gender,
     var location: Location,
-    var registered: LocalDateTime
-)
+    var registered: LocalDateTime?
+) {
+
+    constructor(id: String) : this(
+        id = id,
+        name = "",
+        surname = "",
+        email = "",
+        picture = Picture("", ""),
+        phone = "",
+        gender = Gender.MALE,
+        location = Location("", "", "", ""),
+        registered = null
+    )
+}
 
 data class Picture(
     var large: String,
