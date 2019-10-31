@@ -5,4 +5,5 @@
 	<string name="home_filter_by_surname">Surname</string>
 	<string name="home_filter_by_email">Email</string>
 	<string name="home_filter_by">Filter by:</string>
+	<string name="home_empty_results">No results found</string>
 </resources>
