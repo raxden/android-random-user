@@ -38,7 +38,7 @@
     <style name="AppButton" parent="Widget.MaterialComponents.Button" />
 
     <!-- https://material.io/develop/android/components/text-input-layout/ -->
-    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense" >
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" >
         <item name="boxBackgroundColor">@color/box_background_color</item>
     </style>
 
