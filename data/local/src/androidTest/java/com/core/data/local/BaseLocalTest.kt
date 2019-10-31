@@ -6,7 +6,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.core.common.test.BaseTest
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 abstract class BaseLocalTest: BaseTest() {
 
     protected lateinit var database: AppDatabase
@@ -26,6 +25,4 @@ abstract class BaseLocalTest: BaseTest() {
 
         database.close()
     }
-
-    private fun getContext() = InstrumentationRegistry.getInstrumentation().context
 }

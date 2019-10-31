@@ -1,20 +1,12 @@
 package com.core.data.repository
 
-import android.app.Application
-import android.content.Context
-import android.net.Uri
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.core.common.test.BaseTest
 import com.core.data.local.dao.ExcludedUserDao
 import com.core.data.local.model.ExcludedUserDB
-import com.core.data.remote.AppGateway
+import com.core.data.remote.UserDataSource
 import com.core.data.remote.entity.LoginEntity
 import com.core.data.remote.entity.UserEntity
 import com.core.data.repository.mapper.UserEntityDataMapper
-import com.core.domain.Gender
 import com.core.domain.User
 import com.jakewharton.threetenabp.AndroidThreeTen
 import io.reactivex.Single
@@ -33,7 +25,7 @@ class UserRepositoryTest : BaseTest() {
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @Mock
-    lateinit var gateway: AppGateway
+    lateinit var userDataSource: UserDataSource
     @Mock
     lateinit var excludedUserDao: ExcludedUserDao
 
@@ -57,17 +49,41 @@ class UserRepositoryTest : BaseTest() {
         super.setUp()
 
         AndroidThreeTen.init(getContext())
-        userRepository = UserRepositoryImpl(gateway, excludedUserDao, UserEntityDataMapper())
+        userRepository = UserRepositoryImpl(userDataSource, excludedUserDao, UserEntityDataMapper())
     }
 
     @Test
     fun `Get users from server and check that duplicates and excluded users were removed`() {
-        `when`(gateway.users(anyInt(), anyInt())).thenReturn(Single.just(userEntityList))
+        `when`(userDataSource.users(anyInt(), anyInt())).thenReturn(Single.just(userEntityList))
         `when`(excludedUserDao.findAll()).thenReturn(Single.just(excludedUserList))
 
         userRepository.list(1, 100)
             .test()
             .assertNoErrors()
-            .assertValue { true }
+            .assertValue {
+                checkDuplicates(it) && checkExcludedUsers(it)
+            }
+    }
+
+    @Test
+    fun `Get empty users from server and check that completed is called`() {
+        `when`(userDataSource.users(anyInt(), anyInt())).thenReturn(Single.just(emptyList()))
+        `when`(excludedUserDao.findAll()).thenReturn(Single.just(excludedUserList))
+
+        userRepository.list(1, 100)
+            .test()
+            .assertNoErrors()
+            .assertComplete()
+    }
+
+    private fun checkDuplicates(users: List<User>): Boolean {
+        return users.groupingBy { it.id }.eachCount().filter { it.value > 1 }.isEmpty()
+    }
+
+    private fun checkExcludedUsers(users: List<User>): Boolean {
+        excludedUserList.forEach {excludedUser ->
+            users.find { it.id == excludedUser.id }?.let { return false }
+        }
+        return true
     }
 }

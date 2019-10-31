@@ -2,7 +2,7 @@ package com.core.data.repository
 
 import com.core.data.local.dao.ExcludedUserDao
 import com.core.data.local.model.ExcludedUserDB
-import com.core.data.remote.AppGateway
+import com.core.data.remote.UserDataSource
 import com.core.data.remote.entity.UserEntity
 import com.core.data.repository.mapper.UserEntityDataMapper
 import com.core.domain.User
@@ -15,14 +15,14 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject internal constructor(
-    private val gateway: AppGateway,
+    private val userDataSource: UserDataSource,
     private val excludedUserDao: ExcludedUserDao,
     private val mapper: UserEntityDataMapper
 ) : UserRepository {
 
     override fun list(page: Int, results: Int): Maybe<List<User>> {
         return Single.zip(
-            gateway.users(page, results)
+            userDataSource.users(page, results)
                 .map { it.distinctBy { entity -> entity.login?.uuid } }
                 .observeOn(Schedulers.io()),
             excludedUserDao.findAll()

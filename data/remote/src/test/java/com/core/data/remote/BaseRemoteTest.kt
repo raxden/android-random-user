@@ -1,9 +1,8 @@
 package com.core.data.remote
 
 import com.core.common.test.BaseTest
-import com.core.data.remote.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
-import com.core.data.remote.retrofit.AppRetrofitGateway
-import com.core.data.remote.retrofit.service.AppRetrofitService
+import com.core.data.remote.retrofit.adapter.RxErrorHandlingCallAdapterFactory
+import com.core.data.remote.retrofit.service.UserService
 import com.google.gson.GsonBuilder
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Before
@@ -18,7 +17,7 @@ import java.io.File
 abstract class BaseRemoteTest : BaseTest() {
 
     private lateinit var server: MockWebServer
-    protected lateinit var gateway: AppGateway
+    protected lateinit var userDataSource: UserDataSource
 
     @Before
     override fun setUp() {
@@ -63,9 +62,9 @@ abstract class BaseRemoteTest : BaseTest() {
                 GsonConverterFactory.create(GsonBuilder().create())
             )
             .build()
-            .create(AppRetrofitService::class.java)
+            .create(UserService::class.java)
 
-        gateway = AppRetrofitGateway(service)
+        userDataSource = UserDataSource(service)
     }
 
     private fun stopMockServer() {

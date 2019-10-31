@@ -9,7 +9,7 @@ class UserServiceTest : BaseRemoteTest() {
     @Test
     fun `fetch users`() {
         mockHttpResponse("users.json", HttpURLConnection.HTTP_OK)
-        gateway.users(1, 100).test()
+        userDataSource.users(1, 100).test()
             .assertNoErrors()
             .assertValue { validateUsers(it) }
     }

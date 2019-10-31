@@ -14,14 +14,16 @@ object LocalModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun appDatabase(context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, "app_database.db")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
+    internal fun appDatabase(
+        context: Context
+    ): AppDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "app_database.db")
+        .fallbackToDestructiveMigration()
+        .build()
 
     @JvmStatic
     @Provides
     @Singleton
-    internal fun excludeUserDao(database: AppDatabase): ExcludedUserDao = database.excludedUserDao()
+    internal fun excludeUserDao(
+        database: AppDatabase
+    ): ExcludedUserDao = database.excludedUserDao()
 }
