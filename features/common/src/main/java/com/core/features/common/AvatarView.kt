@@ -16,10 +16,7 @@ class AvatarView @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : BaseComponentView(context, attrs, defStyleAttr, defStyleRes) {
 
-    enum class Gender { MALE, FEMALE }
-
     private var mImage: String = ""
-    private var mGender: Gender = Gender.MALE
 
     override val mStyleable: IntArray
         get() = R.styleable.AvatarView
@@ -29,7 +26,6 @@ class AvatarView @JvmOverloads constructor(
 
     override fun onLoadStyledAttributes(attrs: TypedArray) {
         mImage = attrs.getString(R.styleable.AvatarView_av_image) ?: ""
-        mGender = Gender.values()[attrs.getInt(R.styleable.AvatarView_av_gender, 0)]
     }
 
     override fun onViewCreated() {

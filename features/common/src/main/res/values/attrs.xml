@@ -2,14 +2,9 @@
 <resources>
 
     <attr name="av_image" format="string" />
-    <attr name="av_gender" format="enum">
-        <enum name="male" value="0" />
-        <enum name="female" value="1" />
-    </attr>
 
     <declare-styleable name="AvatarView">
         <attr name="av_image" />
-        <attr name="av_gender" />
     </declare-styleable>
 
 </resources>
