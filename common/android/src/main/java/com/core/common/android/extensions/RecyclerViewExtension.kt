@@ -23,7 +23,6 @@ private fun pageEndlessDetect(recyclerView: RecyclerView): Boolean {
         val totalItemCount = it.itemCount
         val pastVisibleItems = it.findFirstVisibleItemPosition()
         val endless = pastVisibleItems + visibleItemCount >= totalItemCount - visibleItemCount
-        Timber.d("PAGER: $endless = ($pastVisibleItems + $visibleItemCount >= $totalItemCount - $visibleItemCount)")
         endless
     } ?: false
 }
