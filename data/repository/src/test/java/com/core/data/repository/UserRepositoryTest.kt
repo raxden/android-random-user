@@ -16,13 +16,8 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
 
 class UserRepositoryTest : BaseTest() {
-
-    @get:Rule
-    val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @Mock
     lateinit var userDataSource: UserDataSource
