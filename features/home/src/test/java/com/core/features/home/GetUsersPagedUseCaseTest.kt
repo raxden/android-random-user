@@ -39,7 +39,7 @@ class GetUsersPagedUseCaseTest : BaseTest() {
     }
 
     @Test
-    fun `retrieve users from server and fill two pages and check that duplicates are removed`() {
+    fun `retrieve users from server, fill two pages and check that duplicates are removed`() {
         `when`(userRepository.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
             .thenReturn(Maybe.just(userList))
 
