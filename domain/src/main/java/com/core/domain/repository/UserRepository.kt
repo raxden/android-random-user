@@ -9,5 +9,5 @@ interface UserRepository {
 
     fun list(page: Int, results: Int): Maybe<List<User>>
 
-    fun exclude(user: User): Completable
+    fun exclude(id: String): Completable
 }

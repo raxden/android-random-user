@@ -35,7 +35,7 @@ class UserRepositoryImpl @Inject internal constructor(
         ).filter { it.isNotEmpty() }
     }
 
-    override fun exclude(user: User): Completable {
-        return excludedUserDao.insert(ExcludedUserDB(user.id))
+    override fun exclude(id: String): Completable {
+        return excludedUserDao.insert(ExcludedUserDB(id))
     }
 }
