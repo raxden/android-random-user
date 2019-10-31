@@ -9,10 +9,15 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 import timber.log.Timber
 
 @RunWith(AndroidJUnit4::class)
 abstract class BaseTest {
+
+    @get:Rule
+    val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
