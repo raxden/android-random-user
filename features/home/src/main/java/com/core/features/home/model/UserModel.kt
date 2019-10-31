@@ -6,14 +6,17 @@ import com.core.domain.User
 data class UserModel(
     val id: String,
     val name: String,
+    val surname: String,
     val email: String,
     val thumbnail: String,
-    val phone: String
+    val phone: String,
+    var visible: Boolean = true
 ) {
 
     constructor(user: User) : this(
         user.id,
-        user.name + " " + user.surname,
+        user.name,
+        user.surname,
         user.email,
         user.picture.thumbnail,
         user.phone
