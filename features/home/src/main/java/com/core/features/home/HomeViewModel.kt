@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
     val email: MutableLiveData<String> = MutableLiveData()
 
     private val mUsers = MutableLiveData<Resource<MutableList<UserModel>>>()
-    val users = MediatorLiveData<Resource<MutableList<UserModel>>>().apply {
+    val users = MediatorLiveData<Resource<List<UserModel>>>().apply {
 
         var users: Resource<MutableList<UserModel>>? = null
         var queryName: String? = null
@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(
                         it.name.startsWith(queryName ?: "")
                                 && it.surname.startsWith(querySurname ?: "")
                                 && it.email.startsWith(queryEmail ?: "")
-                    }?.toMutableList()
+                    }
                 )
                 else -> users
             }
@@ -97,7 +97,7 @@ class HomeViewModel @Inject constructor(
                     mUsers.notifyObservers()
                 },
                 onError = {
-                    mThrowable.value = Event(it)
+                    mThrowable.value = it
                 }
             )
             .addTo(mCompositeDisposable)

@@ -8,8 +8,8 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
 
-    protected val mThrowable: MutableLiveData<Event<Throwable>> = MutableLiveData()
-    val throwable: LiveData<Event<Throwable>> = mThrowable
+    protected val mThrowable: MutableLiveData<Throwable> = MutableLiveData()
+    val throwable: LiveData<Throwable> = mThrowable
 
     protected val mCompositeDisposable: CompositeDisposable = CompositeDisposable()
 
