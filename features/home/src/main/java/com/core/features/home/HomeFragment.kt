@@ -55,8 +55,8 @@ class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getResults().users.observe(viewLifecycleOwner, Observer {
-            homeListAdapter.submitList(it.toList())
+        viewModel.users.observe(viewLifecycleOwner, Observer {
+            homeListAdapter.submitList(it.data?.toList())
         })
     }
 

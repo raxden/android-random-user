@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="@={viewModel.results.name}" />
+                    android:text="@={viewModel.name}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,7 +86,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={viewModel.results.surname}"
+                    android:text="@={viewModel.surname}"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:text="@={viewModel.results.email}" />
+                    android:text="@={viewModel.email}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

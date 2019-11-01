@@ -1,10 +1,13 @@
 package com.core.features.home
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.BaseViewModel
 import com.core.common.android.Event
 import com.core.common.android.Pager
+import com.core.common.android.Resource
+import com.core.common.android.Status
+import com.core.common.android.extensions.notifyObservers
 import com.core.domain.User
 import com.core.features.home.model.UserModel
 import com.core.features.home.usecase.GetUsersPagedUseCase
@@ -13,7 +16,6 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import com.core.common.android.extensions.notifyObservers
 import com.core.features.home.usecase.ExcludeUserUseCase
 
 class HomeViewModel @Inject constructor(
@@ -21,28 +23,58 @@ class HomeViewModel @Inject constructor(
     private val excludeUserUseCase: ExcludeUserUseCase
 ) : BaseViewModel() {
 
-    private val mFilterResults = FilterResults()
+    val name: MutableLiveData<String> = MutableLiveData()
+    val surname: MutableLiveData<String> = MutableLiveData()
+    val email: MutableLiveData<String> = MutableLiveData()
 
-    private val mLoading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = mLoading
+    private val mUsers = MutableLiveData<Resource<MutableList<UserModel>>>()
+    val users = MediatorLiveData<Resource<MutableList<UserModel>>>().apply {
+
+        var users: Resource<MutableList<UserModel>>? = null
+        var queryName: String? = null
+        var querySurname: String? = null
+        var queryEmail: String? = null
+
+        fun filterData() {
+            value = when (users?.status) {
+                Status.SUCCESS -> Resource.success(
+                    users?.data?.filter {
+                        it.name.startsWith(queryName ?: "")
+                                && it.surname.startsWith(querySurname ?: "")
+                                && it.email.startsWith(queryEmail ?: "")
+                    }?.toMutableList()
+                )
+                else -> users
+            }
+        }
+
+        addSource(mUsers) {
+            users = it
+            filterData()
+        }
+        addSource(name) {
+            queryName = it
+            filterData()
+        }
+        addSource(surname) {
+            querySurname = it
+            filterData()
+        }
+        addSource(email) {
+            queryEmail = it
+            filterData()
+        }
+    }
 
     private val mPager = Pager<User>(1, 20)
 
     init {
-        mLoading.value = true
+        mUsers.value = Resource.loading(mutableListOf())
         loadUsers(mPager)
     }
 
-    override fun onCleared() {
-        mPager.clear()
-        super.onCleared()
-    }
-
-    fun getResults() = mFilterResults
-
     fun refreshContent() {
-        mFilterResults.clearData()
-        mLoading.value = true
+        mUsers.value = Resource.loading(mutableListOf())
         loadUsers(mPager.clear())
     }
 
@@ -61,7 +93,8 @@ class HomeViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onComplete = {
-                    mFilterResults.removeData(item)
+                    mUsers.value?.data?.remove(item)
+                    mUsers.notifyObservers()
                 },
                 onError = {
                     mThrowable.value = Event(it)
@@ -77,12 +110,13 @@ class HomeViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = { data ->
-                    mFilterResults.addData(data)
-                    mLoading.value = false
+                    val currentData = mUsers.value?.data
+                    currentData?.addAll(data)
+                    mUsers.value = Resource.success(currentData)
                 },
                 onError = {
-                    mThrowable.value = Event(it)
-                    mLoading.value = false
+                    val currentData = mUsers.value?.data
+                    mUsers.value = Resource.error(it, currentData)
                 }
             )
             .addTo(mCompositeDisposable)
