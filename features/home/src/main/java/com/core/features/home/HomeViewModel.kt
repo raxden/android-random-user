@@ -23,6 +23,8 @@ class HomeViewModel @Inject constructor(
     private val excludeUserUseCase: ExcludeUserUseCase
 ) : BaseViewModel() {
 
+//    private val
+
     val name: MutableLiveData<String> = MutableLiveData()
     val surname: MutableLiveData<String> = MutableLiveData()
     val email: MutableLiveData<String> = MutableLiveData()
@@ -93,7 +95,8 @@ class HomeViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onComplete = {
-                    mUsers.value?.data?.remove(item)
+                    val itemToRemove = mUsers.value?.data?.find { it.id == item.id }
+                    mUsers.value?.data?.remove(itemToRemove)
                     mUsers.notifyObservers()
                 },
                 onError = {
