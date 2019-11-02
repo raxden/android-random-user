@@ -15,6 +15,17 @@ class UserServiceTest : BaseRemoteTest() {
     }
 
     private fun validateUsers(list: List<UserEntity>): Boolean {
-        return true
+        return list.find { !validateUser(it) }?.let { false } ?: true
+    }
+
+    private fun validateUser(user: UserEntity): Boolean {
+        return user.gender != null
+                && user.email != null
+                && user.login != null
+                && user.location != null
+                && user.name != null
+                && user.picture != null
+                && user.registered != null
+                && user.phone != null
     }
 }
