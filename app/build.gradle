@@ -19,7 +19,6 @@ dependencies {
 
     implementation project(Modules.navigation)
 
-    implementation project(Modules.featureSplash)
     implementation project(Modules.featureHome)
     implementation project(Modules.featureDetail)
 
