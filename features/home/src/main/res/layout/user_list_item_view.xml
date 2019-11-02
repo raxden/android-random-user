@@ -13,7 +13,6 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_item_view"
-        visibleGone="@{item.visible}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -53,25 +52,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{item.name}"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/avatarView"
-                app:layout_constraintTop_toTopOf="@+id/avatarView"
-                tools:text="Name"
-                tools:visibility="visible" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/surnameTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{item.surname}"
-                android:textColor="#000000"
+                android:text="@{item.name + ' ' + item.surname}"
+                android:textDirection="locale"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/removeView"
-                app:layout_constraintStart_toEndOf="@+id/nameTextView"
+                app:layout_constraintStart_toEndOf="@+id/avatarView"
                 app:layout_constraintTop_toTopOf="@+id/avatarView"
                 tools:text="Name"
                 tools:visibility="visible" />
@@ -83,7 +68,7 @@
                 android:text="@{item.email}"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toTopOf="@+id/phoneTextView"
-                app:layout_constraintEnd_toEndOf="@+id/surnameTextView"
+                app:layout_constraintEnd_toEndOf="@+id/nameTextView"
                 app:layout_constraintStart_toStartOf="@+id/nameTextView"
                 app:layout_constraintTop_toBottomOf="@+id/nameTextView"
                 tools:text="email"

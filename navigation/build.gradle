@@ -2,5 +2,10 @@ apply plugin: 'com.android.library'
 apply from: '../android_commons.gradle'
 
 dependencies {
+    implementation project(Modules.domain)
 
+    // DAGGER
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
 }

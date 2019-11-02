@@ -1,5 +1,6 @@
 package com.core.features.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.BaseViewModel
@@ -23,7 +24,8 @@ class HomeViewModel @Inject constructor(
     private val excludeUserUseCase: ExcludeUserUseCase
 ) : BaseViewModel() {
 
-//    private val
+    private val mUserSelected = MutableLiveData<Event<User>>()
+    val userSelected: LiveData<Event<User>> = mUserSelected
 
     val name: MutableLiveData<String> = MutableLiveData()
     val surname: MutableLiveData<String> = MutableLiveData()
@@ -86,7 +88,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onItemSelected(item: UserModel) {
-
+        mPager.getAllData().find { it.id == item.id }?.let { user ->
+            mUserSelected.value = Event(user)
+        }
     }
 
     fun onItemRemoved(item: UserModel) {

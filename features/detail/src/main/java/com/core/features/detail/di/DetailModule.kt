@@ -9,6 +9,7 @@ import com.core.features.detail.DetailActivity
 import com.core.features.detail.DetailFragment
 import com.core.features.detail.DetailViewModel
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
+import com.core.lifecycle.activity.ToolbarActivityLifecycle
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -31,6 +32,12 @@ abstract class DetailModule {
         @IntoSet
         internal abstract fun injectFragment(
             lifecycleObserver: InjectFragmentActivityLifecycle<DetailFragment>
+        ): LifecycleObserver
+
+        @Binds
+        @IntoSet
+        internal abstract fun toolbar(
+            lifecycleObserver: ToolbarActivityLifecycle
         ): LifecycleObserver
 
         @Binds

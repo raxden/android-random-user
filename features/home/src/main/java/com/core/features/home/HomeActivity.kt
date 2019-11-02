@@ -1,9 +1,11 @@
 package com.core.features.home
 
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.core.activity.BaseFragmentActivity
 import com.core.common.android.extensions.getExtras
@@ -12,6 +14,7 @@ import com.core.features.home.view.FilterBottomSheetDialog
 import com.core.features.home.view.FilterView
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.lifecycle.activity.ToolbarActivityLifecycle
+import com.core.navigation.NavigationHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
@@ -21,6 +24,8 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var navigationHelper: NavigationHelper
 
     private val viewModel: HomeViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
@@ -28,6 +33,16 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
 
     override val layoutId: Int
         get() = R.layout.home_activity
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.userSelected.observe(this, Observer {
+            it.getContentIfNotHandled()?.let { user ->
+                navigationHelper.launchDetail(user)
+            }
+        })
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.home_toolbar, menu)

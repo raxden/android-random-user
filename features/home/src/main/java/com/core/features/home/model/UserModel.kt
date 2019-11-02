@@ -9,8 +9,7 @@ data class UserModel(
     val surname: String,
     val email: String,
     val thumbnail: String,
-    val phone: String,
-    var visible: Boolean = true
+    val phone: String
 ) {
 
     constructor(user: User) : this(

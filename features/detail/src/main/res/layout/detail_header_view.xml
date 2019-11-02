@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.core.features.detail.model.UserDetailModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/grayTextViewPlaceholder"
+            app:layout_constraintDimensionRatio="H,4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:urlImage="@{item.image}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/age_view"
+            style="@style/CodeFont.Subtitle1.Shadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.registeredDate}"
+            android:textColor="@color/white"
+            android:paddingEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/genre_view"
+            app:layout_constraintStart_toStartOf="@+id/genre_view"
+            tools:text="33 años" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/genre_view"
+            style="@style/CodeFont.Subtitle1.Shadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="24dp"
+            android:paddingEnd="8dp"
+            bind:stringResource="@{item.gender}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Mujer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

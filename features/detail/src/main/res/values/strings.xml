@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="detail_male">Hombre</string>
+	<string name="detail_female">Mujer</string>
+</resources>

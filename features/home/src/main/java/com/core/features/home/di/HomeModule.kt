@@ -10,6 +10,7 @@ import com.core.features.home.HomeFragment
 import com.core.features.home.HomeViewModel
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.lifecycle.activity.ToolbarActivityLifecycle
+import com.core.navigation.NavigationModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -22,7 +23,7 @@ abstract class HomeModule {
     @ContributesAndroidInjector(modules = [HomeActivityModule::class])
     internal abstract fun activity(): HomeActivity
 
-    @Module(includes = [BaseActivityModule::class])
+    @Module(includes = [BaseActivityModule::class, NavigationModule::class])
     abstract class HomeActivityModule {
 
         @Binds

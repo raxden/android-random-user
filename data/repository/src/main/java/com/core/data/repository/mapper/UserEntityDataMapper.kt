@@ -16,8 +16,8 @@ class UserEntityDataMapper @Inject constructor() : DataMapper<UserEntity, User>(
 
     override fun transform(source: UserEntity) = User(
         id = source.login?.uuid ?: "",
-        name = source.name?.first ?: "",
-        surname = source.name?.last ?: "",
+        name = source.name?.first?.trim() ?: "",
+        surname = source.name?.last?.trim() ?: "",
         email = source.email ?: "",
         picture = Picture(
             source.picture?.large ?: "",

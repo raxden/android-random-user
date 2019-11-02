@@ -2,5 +2,6 @@
 <resources>
 
     <color name="lightGray">#989898</color>
+    <color name="grayTextViewPlaceholder">#C8C8C8</color>
 
 </resources>
