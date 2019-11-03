@@ -12,9 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.core.common.android.AndroidUtils
+import com.core.util.CrashReportingTree
 import dagger.android.*
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
+import timber.log.Timber
 import javax.inject.Inject
 
 abstract class BaseApplication : Application(),
@@ -36,6 +38,7 @@ abstract class BaseApplication : Application(),
 
         initCompatVector()
         initDagger()
+        initTimber()
     }
 
     abstract fun initDaggerApplicationComponent()
@@ -53,6 +56,13 @@ abstract class BaseApplication : Application(),
 
     private fun initCompatVector() {
         if (!AndroidUtils.hasLollipop()) AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+    }
+
+    private fun initTimber() {
+        Timber.plant(when (BuildConfig.DEBUG) {
+            true -> Timber.DebugTree()
+            else -> CrashReportingTree()
+        })
     }
 
     private fun initDagger() {

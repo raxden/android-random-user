@@ -11,7 +11,7 @@ class RxErrorHandlingErrorTest : BaseRemoteTest() {
     @Test
     fun `throw client error and catch it`() {
         mockHttpResponse("error.json", HttpURLConnection.HTTP_BAD_REQUEST)
-        gateway.users(1, 100).test().assertError {
+        userDataSource.users(1, 100).test().assertError {
             (it as RetrofitException).kind == RetrofitException.Kind.CLIENT_ERROR &&
                     it.parseBodyErrorAs(ErrorEntity::class.java)?.let { entity ->
                         entity.error == "Uh oh, something has gone wrong. Please tweet us @randomapi about the issue. Thank you."
@@ -22,7 +22,7 @@ class RxErrorHandlingErrorTest : BaseRemoteTest() {
     @Test
     fun `throw unauthenticated error and catch it`() {
         mockHttpResponse("", HttpURLConnection.HTTP_UNAUTHORIZED)
-        gateway.users(1, 100).test().assertError {
+        userDataSource.users(1, 100).test().assertError {
             (it as RetrofitException).kind == RetrofitException.Kind.UNAUTHENTICATED
         }
     }
@@ -30,7 +30,7 @@ class RxErrorHandlingErrorTest : BaseRemoteTest() {
     @Test
     fun `throw server error and catch it`() {
         mockHttpResponse("", HttpURLConnection.HTTP_INTERNAL_ERROR)
-        gateway.users(1, 100).test().assertError {
+        userDataSource.users(1, 100).test().assertError {
             (it as RetrofitException).kind == RetrofitException.Kind.SERVER_ERROR
         }
     }
@@ -38,7 +38,7 @@ class RxErrorHandlingErrorTest : BaseRemoteTest() {
     @Test
     fun `throw unexpected error and catch it`() {
         mockHttpResponse("", 600)
-        gateway.users(1, 100).test().assertError {
+        userDataSource.users(1, 100).test().assertError {
             (it as RetrofitException).kind == RetrofitException.Kind.UNEXPECTED
         }
     }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.core.features.home.HomeViewModel" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="item"
+            type="com.core.features.home.model.UserModel" />
+    </data>
+
+    <com.core.features.home.view.UserListItemView
+        android:id="@+id/user_item_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        app:item="@{item}"
+        app:setOnRemoveClickListener="@{(view) -> viewModel.onItemRemoved(item)}"
+        bind:onSafeClick="@{()-> viewModel.onItemSelected(item)}" />
+
+</layout>

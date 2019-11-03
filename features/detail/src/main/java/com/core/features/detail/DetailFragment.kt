@@ -4,12 +4,15 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.core.features.detail.databinding.DetailFragmentBinding
 import com.core.fragment.BaseViewFragment
+import com.core.navigation.NavigationHelper
 import javax.inject.Inject
 
 class DetailFragment: BaseViewFragment<DetailFragmentBinding>() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var navigationHelper: NavigationHelper
 
     private val viewModel: DetailViewModel by lazy {
         ViewModelProvider(activity!!, viewModelFactory).get(DetailViewModel::class.java)

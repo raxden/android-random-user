@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="home_title">My amazing random user app</string>
+	<string name="home_filter_by_name">Name</string>
+	<string name="home_filter_by_surname">Surname</string>
+	<string name="home_filter_by_email">Email</string>
+	<string name="home_filter_by">Filter by:</string>
+	<string name="home_empty_results">No results found</string>
+	<string name="home_error_to_retrieve_users">Unable to recover users</string>
+	<string name="home_error_unknown_title">¡Oops!</string>
+	<string name="home_error_unknown_message">Something went wrong.</string>
+</resources>

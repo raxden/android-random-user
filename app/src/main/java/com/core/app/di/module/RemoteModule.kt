@@ -3,10 +3,9 @@ package com.core.app.di.module
 import android.content.Context
 import com.core.app.BuildConfig
 import com.core.app.R
-import com.core.data.remote.AppGateway
-import com.core.data.remote.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
-import com.core.data.remote.retrofit.AppRetrofitGateway
-import com.core.data.remote.retrofit.service.AppRetrofitService
+import com.core.data.remote.retrofit.adapter.RxErrorHandlingCallAdapterFactory
+import com.core.data.remote.UserDataSource
+import com.core.data.remote.retrofit.service.UserService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -28,49 +27,44 @@ object RemoteModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun gson(): Gson {
-        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
-    }
+    internal fun gson(): Gson = GsonBuilder().create()
 
     @JvmStatic
     @Provides
     @Singleton
-    internal fun httpLoggingInterceptorLevel(): HttpLoggingInterceptor.Level {
-        return if (BuildConfig.DEBUG)
-            HttpLoggingInterceptor.Level.BODY
-        else
-            HttpLoggingInterceptor.Level.NONE
+    internal fun httpLoggingInterceptorLevel(): HttpLoggingInterceptor.Level = when {
+        BuildConfig.DEBUG -> HttpLoggingInterceptor.Level.BODY
+        else -> HttpLoggingInterceptor.Level.NONE
     }
 
-    // Interceptors ====================================================================================================
+    // Interceptors ================================================================================
 
     @JvmStatic
     @Provides
     @Singleton
     internal fun httpLoggingInterceptor(
-        logginLevel: HttpLoggingInterceptor.Level
-    ): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
-            level = logginLevel
-        }
+        level: HttpLoggingInterceptor.Level
+    ): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        this.level = level
     }
 
-    // OKHttpClient ====================================================================================================
+
+    // OKHttpClient ================================================================================
 
     @JvmStatic
     @Provides
     @Singleton
-    internal fun httpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addNetworkInterceptor(httpLoggingInterceptor)
-            .retryOnConnectionFailure(true)
-            .readTimeout(TIMEOUT.toLong(), TimeUnit.SECONDS)
-            .writeTimeout(TIMEOUT.toLong(), TimeUnit.SECONDS)
-            .connectTimeout(CONNECTION_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            .build()
-    }
+    internal fun httpClient(
+        interceptor: HttpLoggingInterceptor
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addNetworkInterceptor(interceptor)
+        .retryOnConnectionFailure(true)
+        .readTimeout(TIMEOUT.toLong(), TimeUnit.SECONDS)
+        .writeTimeout(TIMEOUT.toLong(), TimeUnit.SECONDS)
+        .connectTimeout(CONNECTION_TIMEOUT.toLong(), TimeUnit.SECONDS)
+        .build()
 
-    // Retrofit ========================================================================================================
+    // Retrofit ====================================================================================
 
     @JvmStatic
     @Provides
@@ -79,33 +73,29 @@ object RemoteModule {
         context: Context,
         httpClient: OkHttpClient,
         gson: Gson
-    ): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(context.getString(R.string.data_api_domain))
-            .client(httpClient)
-            .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-    }
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(context.getString(R.string.data_api_domain))
+        .client(httpClient)
+        .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
 
-    // RetrofitService =================================================================================================
+    // Retrofit services ===========================================================================
 
     @JvmStatic
     @Provides
     @Singleton
-    internal fun appRetrofitService(retrofit: Retrofit): AppRetrofitService {
-        return retrofit.create(AppRetrofitService::class.java)
-    }
+    internal fun userService(
+        retrofit: Retrofit
+    ): UserService = retrofit.create(UserService::class.java)
 
-    // Gateway =========================================================================================================
+    // Data sources ================================================================================
 
     @JvmStatic
     @Provides
     @Singleton
-    internal fun appGateway(
-        service: AppRetrofitService
-    ): AppGateway {
-        return AppRetrofitGateway(service)
-    }
+    internal fun userDataSource(
+        service: UserService
+    ): UserDataSource = UserDataSource(service)
 }

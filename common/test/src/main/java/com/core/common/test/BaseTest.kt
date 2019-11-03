@@ -1,17 +1,15 @@
 package com.core.common.test
 
-import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.core.common.test.rules.RxSchedulerRule
+import io.mockk.MockKAnnotations
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
-import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 import timber.log.Timber
 
-@RunWith(AndroidJUnit4::class)
 abstract class BaseTest {
 
     @get:Rule
@@ -22,12 +20,11 @@ abstract class BaseTest {
 
     @Before
     open fun setUp() {
+        MockKAnnotations.init(this)
         Timber.plant(TestReportingTree())
     }
 
     @After
     open fun tearDown() {
     }
-
-    fun getContext(): Context = InstrumentationRegistry.getInstrumentation().context
 }

@@ -36,24 +36,6 @@
         <item name="android:navigationBarColor">@color/navigationBarColor</item>
     </style>
 
-    <style name="BaseTheme.Translucent">
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
-
-    <style name="BaseTheme.Translucent.Navigation">
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="BaseTheme.Transparent">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">false</item>
-    </style>
-
-    <style name="BaseTheme.Transparent.Navigation">
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentNavigation">false</item>
-    </style>
-
     <!-- ========================================================================= -->
 
 </resources>

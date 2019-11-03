@@ -15,7 +15,7 @@ abstract class BaseLocalTest: BaseTest() {
         super.setUp()
 
         database = Room
-            .inMemoryDatabaseBuilder(getContext(), AppDatabase::class.java)
+            .inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java)
             // allowing main thread queries, just for testing
             .allowMainThreadQueries()
             .build()
@@ -26,6 +26,4 @@ abstract class BaseLocalTest: BaseTest() {
 
         database.close()
     }
-
-    private fun getContext() = InstrumentationRegistry.getInstrumentation().context
 }

@@ -12,12 +12,19 @@ dependencies {
     implementation project(Modules.domain)
     implementation project(Modules.core)
     implementation project(Modules.commonAndroid)
-
-    implementation AndroidLibraries.appCompat
-    implementation AndroidLibraries.recyclerView
+    implementation project(Modules.featureCommon)
 
     // DAGGER
     implementation Libraries.daggerAndroid
     kapt Libraries.daggerCompiler
     kapt Libraries.daggerProcessor
+
+    androidTestImplementation project(Modules.commonTest)
+    androidTestImplementation TestAndroidLibraries.espresso
+    androidTestImplementation TestAndroidLibraries.espressoContrib
+
+    kaptAndroidTest TestAndroidLibraries.databinding
+    debugImplementation TestAndroidLibraries.fragmentTest
+
+    testImplementation project(Modules.commonTest)
 }

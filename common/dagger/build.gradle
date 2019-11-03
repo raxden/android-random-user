@@ -1,6 +1,10 @@
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
 
 dependencies {
     implementation KotlinLibraries.kotlin
-    api Libraries.daggerAndroid
+
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
 }

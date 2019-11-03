@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,11 +11,174 @@
             type="com.core.features.detail.DetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/additionalDataView"
+                style="@style/CodeFont.H6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@string/detail_additional_data"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/maleIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/maleValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/maleValueView"
+                bind:srcVector="@{viewModel.user.genderImage}"
+                tools:src="@drawable/ic_male" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/maleValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toEndOf="@+id/maleIconView"
+                app:layout_constraintTop_toBottomOf="@+id/additionalDataView"
+                bind:strResource="@{viewModel.user.gender}"
+                tools:text="Hombre"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/dateIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/dateValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/dateValueView"
+                app:srcCompat="@drawable/ic_today_black_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dateValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.registeredDate}"
+                app:layout_constraintStart_toEndOf="@+id/dateIconView"
+                app:layout_constraintTop_toBottomOf="@+id/maleValueView"
+                tools:text="23-12-10"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/emailIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/emailValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/emailValueView"
+                app:srcCompat="@drawable/ic_email_black_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/emailValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.email}"
+                app:layout_constraintStart_toEndOf="@+id/emailIconView"
+                app:layout_constraintTop_toBottomOf="@+id/dateValueView"
+                tools:text="email@gmail.com"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/phoneIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/phoneValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/phoneValueView"
+                app:srcCompat="@drawable/ic_phone_black_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phoneValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.phone}"
+                app:layout_constraintStart_toStartOf="@+id/emailValueView"
+                app:layout_constraintTop_toBottomOf="@+id/emailValueView"
+                tools:text="93 555 85 85"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/locationIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/streetValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/streetValueView"
+                app:srcCompat="@drawable/ic_location_on_black_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/streetValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.street}"
+                app:layout_constraintStart_toStartOf="@+id/phoneValueView"
+                app:layout_constraintTop_toBottomOf="@+id/phoneValueView"
+                tools:text="Gran via las corts catalanas"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cityValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.city}"
+                app:layout_constraintStart_toStartOf="@+id/streetValueView"
+                app:layout_constraintTop_toBottomOf="@+id/streetValueView"
+                tools:text="Barcelona"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/stateValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.state}"
+                app:layout_constraintStart_toStartOf="@+id/streetValueView"
+                app:layout_constraintTop_toBottomOf="@+id/cityValueView"
+                tools:text="Spain"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

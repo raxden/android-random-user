@@ -16,11 +16,9 @@ object Modules {
 
     val dataLocal = ":data:local"
     val dataRemote = ":data:remote"
-    val dataModel = ":data:model"
     val dataRepository = ":data:repository"
 
-    val featureSplash = ":features:splash"
-    val featureLogin = ":features:login"
+    val featureCommon = ":features:common"
     val featureHome = ":features:home"
     val featureDetail = ":features:detail"
 }
@@ -30,18 +28,12 @@ object Releases {
     val versionName = "1.0"
 }
 
-object Sdk {
-}
-
 object Versions {
     val minSdk = 21
     val compileSdk = 28
     val targetSdk = 28
     val kotlin = "1.3.50"
-    val appCompat = "1.1.0-rc01"
-    val recyclerview = "1.0.0"
     val gradle = "3.5.1"
-    val fabric = "1.28.1"
     val room = "2.2.0"                      // https://developer.android.com/jetpack/androidx/releases/room
     val gson = "2.8.6"                      // https://github.com/google/gson
     val okHttp = "4.2.1"                    // https://github.com/square/okhttp
@@ -51,13 +43,15 @@ object Versions {
     val dagger = "2.22.1"                   // https://github.com/google/dagger
     val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
-    val mockito = "2.7.1"
-    val lifecycle = "2.2.0-beta01"
+    val glide = "4.9.0"                     // https://github.com/bumptech/glide
     val constraintLayout = "1.1.3"
-    val material = "1.1.0-beta01"
+    val material = "1.1.0-alpha07"
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.3.0"
-    val robolectric = "4.2.1"
+    val fragmentTest = "1.1.0"
+    val mockk = "1.9.2"
+    val databinding = "3.3.2"
+    val espressoCore = "3.1.0"
 }
 
 object KotlinLibraries {
@@ -66,8 +60,6 @@ object KotlinLibraries {
 
 object AndroidLibraries {
     // ANDROID
-    val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-    val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val material = "com.google.android.material:material:${Versions.material}"
 }
@@ -95,11 +87,9 @@ object Libraries {
     val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
 
-    //Lifecycle
-    val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-    val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
-    val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    // Glide
+    val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     // Timber
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
@@ -114,11 +104,18 @@ object TestLibraries {
     val atslJunit = "androidx.test.ext:junit:${Versions.atsl}"
     val atslRunner = "androidx.test:runner:${Versions.atsl}"
     val atslRules = "androidx.test:rules:${Versions.atsl}"
-    // MOCKITO
-    val mockCore = "org.mockito:mockito-core:${Versions.mockito}"
-    val mockAndroid = "org.mockito:mockito-android:${Versions.mockito}"
+    // MOCKK
+    val mockkCore = "io.mockk:mockk:${Versions.mockk}"
+    val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
     // MOCK WEBSERVER
     val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
+}
 
-    val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+object TestAndroidLibraries {
+    val fragmentTest = "androidx.fragment:fragment-testing:${Versions.fragmentTest}"
+    // ESPRESSO
+    val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espressoCore}"
+    // DATA BINDING
+    val databinding = "androidx.databinding:databinding-compiler:${Versions.databinding}"
 }

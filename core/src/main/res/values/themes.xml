@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="BaseTheme.Translucent.Navigation">
+    <style name="AppTheme" parent="BaseTheme">
         <item name="materialButtonStyle">@style/AppButton</item>
         <item name="materialCardViewStyle">@style/AppCard</item>
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
@@ -38,7 +38,7 @@
     <style name="AppButton" parent="Widget.MaterialComponents.Button" />
 
     <!-- https://material.io/develop/android/components/text-input-layout/ -->
-    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense" >
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" >
         <item name="boxBackgroundColor">@color/box_background_color</item>
     </style>
 
