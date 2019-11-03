@@ -37,8 +37,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/removeView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
                 android:padding="6dp"
                 android:tint="@color/lightGray"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -47,12 +48,13 @@
                 app:srcCompat="@drawable/ic_remove_circle_outline_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                style="@style/CodeFont.Subtitle1"
                 android:id="@+id/nameTextView"
+                style="@style/CodeFont.Subtitle1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:maxLines="1"
                 android:text="@{item.name + ' ' + item.surname}"
                 app:layout_constraintEnd_toStartOf="@+id/removeView"
                 app:layout_constraintStart_toEndOf="@+id/avatarView"
@@ -60,25 +62,48 @@
                 tools:text="Name"
                 tools:visibility="visible" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/emailIconView"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/emailTextView"
+                app:layout_constraintStart_toStartOf="@+id/nameTextView"
+                app:layout_constraintTop_toTopOf="@+id/emailTextView"
+                app:srcCompat="@drawable/ic_email_black_24dp" />
+
             <androidx.appcompat.widget.AppCompatTextView
-                style="@style/CodeFont.Subtitle2"
                 android:id="@+id/emailTextView"
+                style="@style/CodeFont.Subtitle2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:maxLines="1"
                 android:text="@{item.email}"
                 android:textColor="@color/lightGray"
                 app:layout_constraintBottom_toTopOf="@+id/phoneTextView"
                 app:layout_constraintEnd_toEndOf="@+id/nameTextView"
-                app:layout_constraintStart_toStartOf="@+id/nameTextView"
+                app:layout_constraintStart_toEndOf="@+id/emailIconView"
                 app:layout_constraintTop_toBottomOf="@+id/nameTextView"
                 tools:text="email"
                 tools:visibility="visible" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/phoneIconView"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/phoneTextView"
+                app:layout_constraintStart_toStartOf="@+id/nameTextView"
+                app:layout_constraintTop_toTopOf="@+id/phoneTextView"
+                app:srcCompat="@drawable/ic_phone_black_24dp" />
+
             <androidx.appcompat.widget.AppCompatTextView
-                style="@style/CodeFont.Subtitle2"
                 android:id="@+id/phoneTextView"
+                style="@style/CodeFont.Subtitle2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:text="@{item.phone}"
                 android:textColor="@color/lightGray"
                 app:layout_constraintBottom_toBottomOf="@+id/avatarView"

@@ -21,7 +21,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/additionalDataView"
-                style="@style/CodeFont.H5"
+                style="@style/CodeFont.H6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -32,18 +32,62 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/emailIconView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/emailValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/emailValueView"
+                app:srcCompat="@drawable/ic_email_black_24dp" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/emailValueView"
                 style="@style/CodeFont.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
                 android:text="@{viewModel.user.email}"
-                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintStart_toEndOf="@+id/emailIconView"
                 app:layout_constraintTop_toBottomOf="@+id/additionalDataView"
                 tools:text="email@gmail.com"
                 tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/phoneIconView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/phoneValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/phoneValueView"
+                app:srcCompat="@drawable/ic_phone_black_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phoneValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.phone}"
+                app:layout_constraintStart_toStartOf="@+id/emailValueView"
+                app:layout_constraintTop_toBottomOf="@+id/emailValueView"
+                tools:text="93 555 85 85"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/locationIconView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/streetValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/streetValueView"
+                app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/streetValueView"
@@ -53,8 +97,8 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
                 android:text="@{viewModel.user.street}"
-                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
-                app:layout_constraintTop_toBottomOf="@+id/emailValueView"
+                app:layout_constraintStart_toStartOf="@+id/phoneValueView"
+                app:layout_constraintTop_toBottomOf="@+id/phoneValueView"
                 tools:text="Gran via las corts catalanas"
                 tools:visibility="visible" />
 
@@ -63,10 +107,10 @@
                 style="@style/CodeFont.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="6dp"
                 android:gravity="center_horizontal"
                 android:text="@{viewModel.user.city}"
-                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintStart_toStartOf="@+id/streetValueView"
                 app:layout_constraintTop_toBottomOf="@+id/streetValueView"
                 tools:text="Barcelona"
                 tools:visibility="visible" />
@@ -76,10 +120,10 @@
                 style="@style/CodeFont.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="6dp"
                 android:gravity="center_horizontal"
                 android:text="@{viewModel.user.state}"
-                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintStart_toStartOf="@+id/streetValueView"
                 app:layout_constraintTop_toBottomOf="@+id/cityValueView"
                 tools:text="Spain"
                 tools:visibility="visible" />

@@ -2,4 +2,5 @@
 <resources>
 	<string name="detail_male">Hombre</string>
 	<string name="detail_female">Mujer</string>
+	<string name="detail_registration_date">User registered in %1$s</string>
 </resources>
