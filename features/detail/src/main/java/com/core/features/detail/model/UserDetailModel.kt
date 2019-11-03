@@ -11,6 +11,7 @@ data class UserDetailModel(
     val email: String,
     val image: String,
     val gender: Int,
+    val genderImage: Int,
     val phone: String,
     val registeredDate: String,
     val street: String,
@@ -26,6 +27,10 @@ data class UserDetailModel(
         when (user.gender) {
             Gender.MALE -> R.string.detail_male
             else -> R.string.detail_female
+        },
+        when (user.gender) {
+            Gender.MALE -> R.drawable.ic_male
+            else -> R.drawable.ic_female
         },
         user.phone,
         user.registered?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) ?: "",

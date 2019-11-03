@@ -8,6 +8,7 @@ import com.core.domain.Picture
 import com.core.domain.Location
 import com.core.domain.User
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,7 +35,7 @@ class UserEntityDataMapper @Inject constructor() : DataMapper<UserEntity, User>(
             source.location?.city ?: "",
             source.location?.state ?: ""
         ),
-        registered = source.registered?.date?.toLocalDateTime("yyyy-MM-dd HH:mm:ss")
+        registered = source.registered?.date?.toLocalDateTime(DateTimeFormatter.ISO_DATE_TIME)
     )
 
     override fun inverse(source: User): UserEntity = UserEntity()

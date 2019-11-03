@@ -1,6 +1,7 @@
 package com.core.features.home
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -27,6 +28,8 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
     @Inject
     lateinit var navigationHelper: NavigationHelper
 
+    private var filterDialog: FilterBottomSheetDialog? = null
+
     private val viewModel: HomeViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
     }
@@ -34,8 +37,18 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
     override val layoutId: Int
         get() = R.layout.home_activity
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putBoolean(FilterBottomSheetDialog::class.java.simpleName, true)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        savedInstanceState?.getBoolean(FilterBottomSheetDialog::class.java.simpleName)?.let {
+            showFilterView()
+        }
 
         viewModel.userSelected.observe(this, Observer {
             it.getContentIfNotHandled()?.let { user ->
@@ -60,6 +73,13 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
         binding.setVariable(BR.viewModel, viewModel)
     }
 
+    override fun onDestroy() {
+        filterDialog?.dismiss()
+        filterDialog = null
+
+        super.onDestroy()
+    }
+
     override fun finish() {
         super.finish()
         overridePendingTransition(0, 0)
@@ -82,6 +102,7 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
     // =============================================================================================
 
     private fun showFilterView() {
-        FilterBottomSheetDialog(this, viewModel).show()
+        filterDialog = FilterBottomSheetDialog(this, viewModel)
+        filterDialog?.show()
     }
 }

@@ -18,6 +18,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import com.core.features.home.usecase.ExcludeUserUseCase
+import java.util.*
 
 class HomeViewModel @Inject constructor(
     private val getUsersPagedUseCase: GetUsersPagedUseCase,
@@ -43,9 +44,10 @@ class HomeViewModel @Inject constructor(
             value = when (users?.status) {
                 Status.SUCCESS -> Resource.success(
                     users?.data?.filter {
-                        it.name.startsWith(queryName ?: "")
-                                && it.surname.startsWith(querySurname ?: "")
-                                && it.email.startsWith(queryEmail ?: "")
+                        val locale = Locale.getDefault()
+                        it.name.toLowerCase(locale).startsWith(queryName ?: "")
+                                && it.surname.toLowerCase(locale).startsWith(querySurname ?: "")
+                                && it.email.toLowerCase(locale).startsWith(queryEmail ?: "")
                     }
                 )
                 else -> users
@@ -57,15 +59,15 @@ class HomeViewModel @Inject constructor(
             filterData()
         }
         addSource(name) {
-            queryName = it
+            queryName = it.toLowerCase(Locale.getDefault())
             filterData()
         }
         addSource(surname) {
-            querySurname = it
+            querySurname = it.toLowerCase(Locale.getDefault())
             filterData()
         }
         addSource(email) {
-            queryEmail = it
+            queryEmail = it.toLowerCase(Locale.getDefault())
             filterData()
         }
     }

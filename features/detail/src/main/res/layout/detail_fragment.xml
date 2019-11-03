@@ -27,15 +27,64 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
-                android:text="Additional data"
+                android:text="@string/detail_additional_data"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/emailIconView"
-                android:layout_width="wrap_content"
+                android:id="@+id/maleIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/maleValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/maleValueView"
+                bind:srcVector="@{viewModel.user.genderImage}"
+                tools:src="@drawable/ic_male" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/maleValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toEndOf="@+id/maleIconView"
+                app:layout_constraintTop_toBottomOf="@+id/additionalDataView"
+                bind:strResource="@{viewModel.user.gender}"
+                tools:text="Hombre"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/dateIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:tint="@color/lightGray"
+                app:layout_constraintBottom_toBottomOf="@+id/dateValueView"
+                app:layout_constraintStart_toStartOf="@+id/additionalDataView"
+                app:layout_constraintTop_toTopOf="@+id/dateValueView"
+                app:srcCompat="@drawable/ic_today_black_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dateValueView"
+                style="@style/CodeFont.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.user.registeredDate}"
+                app:layout_constraintStart_toEndOf="@+id/dateIconView"
+                app:layout_constraintTop_toBottomOf="@+id/maleValueView"
+                tools:text="23-12-10"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/emailIconView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:tint="@color/lightGray"
                 app:layout_constraintBottom_toBottomOf="@+id/emailValueView"
                 app:layout_constraintStart_toStartOf="@+id/additionalDataView"
@@ -52,14 +101,14 @@
                 android:gravity="center_horizontal"
                 android:text="@{viewModel.user.email}"
                 app:layout_constraintStart_toEndOf="@+id/emailIconView"
-                app:layout_constraintTop_toBottomOf="@+id/additionalDataView"
+                app:layout_constraintTop_toBottomOf="@+id/dateValueView"
                 tools:text="email@gmail.com"
                 tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/phoneIconView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:tint="@color/lightGray"
                 app:layout_constraintBottom_toBottomOf="@+id/phoneValueView"
                 app:layout_constraintStart_toStartOf="@+id/additionalDataView"
@@ -81,8 +130,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/locationIconView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:tint="@color/lightGray"
                 app:layout_constraintBottom_toBottomOf="@+id/streetValueView"
                 app:layout_constraintStart_toStartOf="@+id/additionalDataView"

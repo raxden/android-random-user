@@ -22,44 +22,22 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("selected")
-    fun selected(view: View, selected: Boolean) {
-        view.isSelected = selected
-    }
-
-    @JvmStatic
     @BindingAdapter("visibleGone")
     fun visibleGone(view: View, show: Boolean) {
         view.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     @JvmStatic
-    @BindingAdapter("visibleInvisible")
-    fun visibleInvisible(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.INVISIBLE
-    }
-
-    @JvmStatic
-    @BindingAdapter("stringResource")
-    fun stringResource(view: TextView, resourceId: Int) {
+    @BindingAdapter("strResource")
+    fun strResource(view: TextView, resourceId: Int) {
         if (resourceId != 0)
             view.setText(resourceId)
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["text_date", "text_date_format"], requireAll = false)
-    fun parseLocalDateTimeToDate(
-        view: TextView,
-        date: LocalDateTime?,
-        format: String? = "dd MMM yyyy"
-    ) {
-        view.text = date?.format(DateTimeFormatter.ofPattern(format ?: "dd MMM yyyy")) ?: view.text
-    }
-
-    @JvmStatic
-    @BindingAdapter(value = ["text_date", "text_date_format"], requireAll = false)
-    fun parseLocalDateToDate(view: TextView, date: LocalDate?, format: String? = "dd MMM yyyy") {
-        view.text = date?.format(DateTimeFormatter.ofPattern(format ?: "dd MMM yyyy")) ?: view.text
+    @BindingAdapter("srcVector")
+    fun srcVector(view: ImageView, resourceId: Int) {
+        view.setImageResource(resourceId)
     }
 
     @JvmStatic

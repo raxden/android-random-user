@@ -29,7 +29,6 @@
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
                 android:textDirection="locale"
-                app:expandedTitleMarginBottom="80dp"
                 app:expandedTitleTextAppearance="@style/CodeFont.H5.Shadow"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="@{viewModel.user.name + ' ' + viewModel.user.surname}"

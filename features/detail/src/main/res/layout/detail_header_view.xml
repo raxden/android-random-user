@@ -20,39 +20,19 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/grayTextViewPlaceholder"
-            app:layout_constraintDimensionRatio="H,4:3"
+            app:layout_constraintDimensionRatio="H,16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:urlImage="@{item.image}" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/genre_view"
-            style="@style/CodeFont.Subtitle1.Shadow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/registered_date_view"
-            app:layout_constraintStart_toStartOf="@+id/registered_date_view"
-            bind:stringResource="@{item.gender}"
-            tools:text="Mujer" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/registered_date_view"
-            style="@style/CodeFont.Subtitle1.Shadow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="24dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:text="@{@string/detail_registration_date(item.registeredDate)}"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <View
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/below_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="33 años" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
