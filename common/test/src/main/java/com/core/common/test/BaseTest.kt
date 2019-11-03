@@ -12,9 +12,6 @@ import timber.log.Timber
 
 abstract class BaseTest {
 
-//    @get:Rule
-//    val mockitoRule: MockitoRule = MockitoJUnit.rule()
-
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 

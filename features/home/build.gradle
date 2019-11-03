@@ -20,7 +20,11 @@ dependencies {
     kapt Libraries.daggerProcessor
 
     androidTestImplementation project(Modules.commonTest)
-    debugImplementation TestLibraries.fragmentTest
+    androidTestImplementation TestAndroidLibraries.espresso
+    androidTestImplementation TestAndroidLibraries.espressoContrib
+
+    kaptAndroidTest TestAndroidLibraries.databinding
+    debugImplementation TestAndroidLibraries.fragmentTest
 
     testImplementation project(Modules.commonTest)
 }

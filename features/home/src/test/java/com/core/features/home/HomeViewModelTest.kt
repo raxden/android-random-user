@@ -39,7 +39,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `retrieve results from server`() {
         val pager = Pager<User>(1, 10)
-        pager.addPageData(data = FakeData.users)
+        pager.addPageData(data = FakeUserData.users)
 
         every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
@@ -48,7 +48,7 @@ class HomeViewModelTest : BaseTest() {
             throwable.observeForever(throwableObserver)
         }
         verify {
-            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
             throwableObserver wasNot Called
         }
         confirmVerified(usersObserver)
@@ -93,7 +93,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `exclude user from list`() {
         val pager = Pager<User>(1, 10)
-        pager.addPageData(data = FakeData.users)
+        pager.addPageData(data = FakeUserData.users)
 
         every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
         every { excludeUserUseCase.execute(any()) } returns Completable.complete()
@@ -103,14 +103,14 @@ class HomeViewModelTest : BaseTest() {
             throwable.observeForever(throwableObserver)
         }
         verify {
-            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
             throwableObserver wasNot Called
         }
         confirmVerified(usersObserver)
 
         homeViewModel.onItemRemoved(UserModel(User("1")))
 
-        val list = FakeData.users.toMutableList()
+        val list = FakeUserData.users.toMutableList()
         list.removeIf { it.id == "1" }
 
         verify {
@@ -123,7 +123,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `filter results by name`() {
         val pager = Pager<User>(1, 10)
-        pager.addPageData(data = FakeData.users)
+        pager.addPageData(data = FakeUserData.users)
 
         every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
@@ -136,9 +136,9 @@ class HomeViewModelTest : BaseTest() {
         homeViewModel.name.postValue("Lumi")
 
         verifyOrder {
-            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
             usersObserver.onChanged(Resource.success(
-                FakeData.users.filter { it.name.startsWith("Lumi") }.map { item ->
+                FakeUserData.users.filter { it.name.startsWith("Lumi") }.map { item ->
                     UserModel(item)
                 }
             ))
@@ -150,7 +150,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `filter results by surname`() {
         val pager = Pager<User>(1, 10)
-        pager.addPageData(data = FakeData.users)
+        pager.addPageData(data = FakeUserData.users)
 
         every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
@@ -163,9 +163,9 @@ class HomeViewModelTest : BaseTest() {
         homeViewModel.surname.postValue("Muller")
 
         verifyOrder {
-            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
             usersObserver.onChanged(Resource.success(
-                FakeData.users.filter { it.surname.startsWith("Muller") }.map { item ->
+                FakeUserData.users.filter { it.surname.startsWith("Muller") }.map { item ->
                     UserModel(item)
                 }
             ))
@@ -177,7 +177,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `filter results by email`() {
         val pager = Pager<User>(1, 10)
-        pager.addPageData(data = FakeData.users)
+        pager.addPageData(data = FakeUserData.users)
 
         every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
@@ -190,9 +190,9 @@ class HomeViewModelTest : BaseTest() {
         homeViewModel.email.postValue("nathan@gmail.com")
 
         verifyOrder {
-            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
             usersObserver.onChanged(Resource.success(
-                FakeData.users.filter { it.email.startsWith("nathan@gmail.com") }.map { item ->
+                FakeUserData.users.filter { it.email.startsWith("nathan@gmail.com") }.map { item ->
                     UserModel(item)
                 }
             ))
@@ -204,7 +204,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `filter results by name, letter to letter`() {
         val pager = Pager<User>(1, 10)
-        pager.addPageData(data = FakeData.users)
+        pager.addPageData(data = FakeUserData.users)
 
         every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
@@ -219,19 +219,19 @@ class HomeViewModelTest : BaseTest() {
         homeViewModel.name.postValue("aaa")
 
         verifyOrder {
-            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
             usersObserver.onChanged(Resource.success(
-                FakeData.users.filter { it.name.startsWith("a") }.map { item ->
+                FakeUserData.users.filter { it.name.startsWith("a") }.map { item ->
                     UserModel(item)
                 }
             ))
             usersObserver.onChanged(Resource.success(
-                FakeData.users.filter { it.name.startsWith("aa") }.map { item ->
+                FakeUserData.users.filter { it.name.startsWith("aa") }.map { item ->
                     UserModel(item)
                 }
             ))
             usersObserver.onChanged(Resource.success(
-                FakeData.users.filter { it.name.startsWith("aaa") }.map { item ->
+                FakeUserData.users.filter { it.name.startsWith("aaa") }.map { item ->
                     UserModel(item)
                 }
             ))

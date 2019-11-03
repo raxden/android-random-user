@@ -4,8 +4,9 @@ import com.core.domain.Gender
 import com.core.domain.Location
 import com.core.domain.Picture
 import com.core.domain.User
+import com.core.features.home.model.UserModel
 
-object FakeData {
+object FakeUserData {
 
     val users = mutableListOf(
         User(

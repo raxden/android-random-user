@@ -50,15 +50,14 @@ object Versions {
     val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
     val glide = "4.9.0"                     // https://github.com/bumptech/glide
-    val mockito = "2.7.1"
-    val lifecycle = "2.2.0-beta01"
     val constraintLayout = "1.1.3"
     val material = "1.1.0-alpha07"
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.3.0"
-    val robolectric = "4.2.1"
     val fragmentTest = "1.1.0"
     val mockk = "1.9.2"
+    val databinding = "3.3.2"
+    val espressoCore = "3.1.0"
 }
 
 object KotlinLibraries {
@@ -94,12 +93,6 @@ object Libraries {
     val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
 
-    //Lifecycle
-    val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-    val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
-    val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-
     // Glide
     val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
@@ -117,15 +110,18 @@ object TestLibraries {
     val atslJunit = "androidx.test.ext:junit:${Versions.atsl}"
     val atslRunner = "androidx.test:runner:${Versions.atsl}"
     val atslRules = "androidx.test:rules:${Versions.atsl}"
-    val fragmentTest = "androidx.fragment:fragment-testing:${Versions.fragmentTest}"
-    // MOCKITO
-    val mockCore = "org.mockito:mockito-core:${Versions.mockito}"
-    val mockAndroid = "org.mockito:mockito-android:${Versions.mockito}"
     // MOCKK
     val mockkCore = "io.mockk:mockk:${Versions.mockk}"
     val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
     // MOCK WEBSERVER
     val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
+}
 
-    val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+object TestAndroidLibraries {
+    val fragmentTest = "androidx.fragment:fragment-testing:${Versions.fragmentTest}"
+    // ESPRESSO
+    val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espressoCore}"
+    // DATA BINDING
+    val databinding = "androidx.databinding:databinding-compiler:${Versions.databinding}"
 }

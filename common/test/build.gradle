@@ -5,6 +5,9 @@ dependencies {
     implementation Libraries.rxAndroid
     implementation Libraries.rxKotlin
 
+    implementation TestAndroidLibraries.espresso
+    implementation TestAndroidLibraries.espressoContrib
+
     api KotlinLibraries.kotlin
     api TestLibraries.mockkCore
     api TestLibraries.mockkAndroid
