@@ -6,13 +6,14 @@ dependencies {
     implementation Libraries.rxKotlin
 
     api KotlinLibraries.kotlin
-    api TestLibraries.mockCore
-    api TestLibraries.mockAndroid
+    api TestLibraries.mockkCore
+    api TestLibraries.mockkAndroid
+
     api TestLibraries.archCoreTest
     api TestLibraries.atslJunit
     api TestLibraries.atslRules
     api TestLibraries.atslRunner
-    api TestLibraries.robolectric
+
     api Libraries.threetenabp
     api Libraries.timber
 }

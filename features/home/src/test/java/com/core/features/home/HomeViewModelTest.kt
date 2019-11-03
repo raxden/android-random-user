@@ -4,33 +4,32 @@ import androidx.lifecycle.Observer
 import com.core.common.android.Pager
 import com.core.common.android.Resource
 import com.core.common.test.BaseTest
-import com.core.common.test.MockitoUtils
 import com.core.domain.User
 import com.core.features.home.model.UserModel
 import com.core.features.home.usecase.ExcludeUserUseCase
 import com.core.features.home.usecase.GetUsersPagedUseCase
+import io.mockk.*
+import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.RelaxedMockK
 import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.Mock
-import org.mockito.Mockito.*
 
 class HomeViewModelTest : BaseTest() {
 
-    @Mock
+    @MockK
     lateinit var getUsersPagedUseCase: GetUsersPagedUseCase
-    @Mock
+    @MockK
     lateinit var excludeUserUseCase: ExcludeUserUseCase
-    @Mock
+    @RelaxedMockK
     lateinit var usersObserver: Observer<Resource<List<UserModel>>>
-    @Mock
+    @RelaxedMockK
     lateinit var nameObserver: Observer<String>
-    @Mock
+    @RelaxedMockK
     lateinit var surnameObserver: Observer<String>
-    @Mock
+    @RelaxedMockK
     lateinit var emailObserver: Observer<String>
-    @Mock
+    @MockK
     private lateinit var throwableObserver: Observer<Throwable>
 
     private lateinit var homeViewModel: HomeViewModel
@@ -42,14 +41,17 @@ class HomeViewModelTest : BaseTest() {
         val pager = Pager<User>(1, 10)
         pager.addPageData(data = FakeData.users)
 
-        `when`(getUsersPagedUseCase.execute(MockitoUtils.anyObject())).thenReturn(Single.just(pager))
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
         homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
             users.observeForever(usersObserver)
             throwable.observeForever(throwableObserver)
         }
-        verify(usersObserver).onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
-        verify(throwableObserver, never()).onChanged(throwable)
+        verify {
+            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
     }
 
     @Test
@@ -57,14 +59,17 @@ class HomeViewModelTest : BaseTest() {
         val pager = Pager<User>(1, 10)
         pager.addPageData(data = mutableListOf())
 
-        `when`(getUsersPagedUseCase.execute(MockitoUtils.anyObject())).thenReturn(Single.just(pager))
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
         homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
             users.observeForever(usersObserver)
             throwable.observeForever(throwableObserver)
         }
-        verify(usersObserver).onChanged(Resource.success(emptyList()))
-        verify(throwableObserver, never()).onChanged(throwable)
+        verify {
+            usersObserver.onChanged(Resource.success(emptyList()))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
     }
 
     @Test
@@ -72,16 +77,17 @@ class HomeViewModelTest : BaseTest() {
         val pager = Pager<User>(1, 10)
         pager.addPageData(data = mutableListOf())
 
-        `when`(getUsersPagedUseCase.execute(MockitoUtils.anyObject())).thenReturn(
-            Single.error(throwable)
-        )
+        every { getUsersPagedUseCase.execute(any()) } returns Single.error(throwable)
 
         homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
             users.observeForever(usersObserver)
             throwable.observeForever(throwableObserver)
         }
-        verify(usersObserver).onChanged(Resource.error(throwable, emptyList()))
-        verify(throwableObserver, never()).onChanged(throwable)
+        verify {
+            usersObserver.onChanged(Resource.error(throwable, emptyList()))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
     }
 
     @Test
@@ -89,71 +95,110 @@ class HomeViewModelTest : BaseTest() {
         val pager = Pager<User>(1, 10)
         pager.addPageData(data = FakeData.users)
 
-        `when`(getUsersPagedUseCase.execute(MockitoUtils.anyObject())).thenReturn(Single.just(pager))
-        `when`(excludeUserUseCase.execute(ArgumentMatchers.anyString())).thenReturn(Completable.complete())
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
+        every { excludeUserUseCase.execute(any()) } returns Completable.complete()
 
         homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
             users.observeForever(usersObserver)
             throwable.observeForever(throwableObserver)
         }
-        verify(usersObserver).onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
-        verify(throwableObserver, never()).onChanged(throwable)
+        verify {
+            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
 
         homeViewModel.onItemRemoved(UserModel(User("1")))
 
         val list = FakeData.users.toMutableList()
         list.removeIf { it.id == "1" }
 
-        verify(usersObserver).onChanged(Resource.success(list.map { item -> UserModel(item) }))
-        verify(throwableObserver, never()).onChanged(throwable)
+        verify {
+            usersObserver.onChanged(Resource.success(list.map { item -> UserModel(item) }))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
     }
 
     @Test
-    fun `filter results by name, surname and email`() {
+    fun `filter results by name`() {
         val pager = Pager<User>(1, 10)
         pager.addPageData(data = FakeData.users)
 
-        `when`(getUsersPagedUseCase.execute(MockitoUtils.anyObject())).thenReturn(Single.just(pager))
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
         homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
             users.observeForever(usersObserver)
             throwable.observeForever(throwableObserver)
             name.observeForever(nameObserver)
-            surname.observeForever(surnameObserver)
-            email.observeForever(emailObserver)
         }
-        verify(usersObserver).onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
-        verify(throwableObserver, never()).onChanged(throwable)
 
         homeViewModel.name.postValue("Lumi")
-        verify(usersObserver).onChanged(
-            Resource.success(
-                FakeData.users.filter { it.name == "Lumi" }.map { item ->
+
+        verifyOrder {
+            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(
+                FakeData.users.filter { it.name.startsWith("Lumi") }.map { item ->
                     UserModel(item)
                 }
-            )
-        )
+            ))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
+    }
 
-        homeViewModel.name.postValue("")
+    @Test
+    fun `filter results by surname`() {
+        val pager = Pager<User>(1, 10)
+        pager.addPageData(data = FakeData.users)
+
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
+
+        homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
+            users.observeForever(usersObserver)
+            throwable.observeForever(throwableObserver)
+            surname.observeForever(surnameObserver)
+        }
+
         homeViewModel.surname.postValue("Muller")
-        verify(usersObserver).onChanged(
-            Resource.success(
-                FakeData.users.filter { it.surname == "Muller" }.map { item ->
-                    UserModel(item)
-                }
-            )
-        )
 
-        homeViewModel.name.postValue("")
-        homeViewModel.surname.postValue("")
-        homeViewModel.email.postValue("nathan@gmail.com")
-        verify(usersObserver).onChanged(
-            Resource.success(
-                FakeData.users.filter { it.email == "nathan@gmail.com" }.map { item ->
+        verifyOrder {
+            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(
+                FakeData.users.filter { it.surname.startsWith("Muller") }.map { item ->
                     UserModel(item)
                 }
-            )
-        )
+            ))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
+    }
+
+    @Test
+    fun `filter results by email`() {
+        val pager = Pager<User>(1, 10)
+        pager.addPageData(data = FakeData.users)
+
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
+
+        homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
+            users.observeForever(usersObserver)
+            throwable.observeForever(throwableObserver)
+            email.observeForever(emailObserver)
+        }
+
+        homeViewModel.email.postValue("nathan@gmail.com")
+
+        verifyOrder {
+            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(
+                FakeData.users.filter { it.email.startsWith("nathan@gmail.com") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
     }
 
     @Test
@@ -161,41 +206,37 @@ class HomeViewModelTest : BaseTest() {
         val pager = Pager<User>(1, 10)
         pager.addPageData(data = FakeData.users)
 
-        `when`(getUsersPagedUseCase.execute(MockitoUtils.anyObject())).thenReturn(Single.just(pager))
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
 
         homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
             users.observeForever(usersObserver)
             throwable.observeForever(throwableObserver)
-            name.observeForever(nameObserver)
+            name.observeForever(emailObserver)
         }
-        verify(usersObserver).onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
-        verify(throwableObserver, never()).onChanged(throwable)
 
         homeViewModel.name.postValue("a")
         homeViewModel.name.postValue("aa")
         homeViewModel.name.postValue("aaa")
-        inOrder(usersObserver).apply {
-            verify(usersObserver).onChanged(
-                Resource.success(
-                    FakeData.users.filter { it.name.startsWith("a") }.map { item ->
-                        UserModel(item)
-                    }
-                )
-            )
-            verify(usersObserver).onChanged(
-                Resource.success(
-                    FakeData.users.filter { it.name.startsWith("aa") }.map { item ->
-                        UserModel(item)
-                    }
-                )
-            )
-            verify(usersObserver).onChanged(
-                Resource.success(
-                    FakeData.users.filter { it.name.startsWith("aaa") }.map { item ->
-                        UserModel(item)
-                    }
-                )
-            )
+
+        verifyOrder {
+            usersObserver.onChanged(Resource.success(FakeData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(
+                FakeData.users.filter { it.name.startsWith("a") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            usersObserver.onChanged(Resource.success(
+                FakeData.users.filter { it.name.startsWith("aa") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            usersObserver.onChanged(Resource.success(
+                FakeData.users.filter { it.name.startsWith("aaa") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            throwableObserver wasNot Called
         }
+        confirmVerified(usersObserver)
     }
 }

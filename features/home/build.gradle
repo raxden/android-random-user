@@ -19,6 +19,8 @@ dependencies {
     kapt Libraries.daggerCompiler
     kapt Libraries.daggerProcessor
 
+    androidTestImplementation project(Modules.commonTest)
+    debugImplementation TestLibraries.fragmentTest
+
     testImplementation project(Modules.commonTest)
-    testImplementation Libraries.threetenabp
 }

@@ -57,6 +57,8 @@ object Versions {
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.3.0"
     val robolectric = "4.2.1"
+    val fragmentTest = "1.1.0"
+    val mockk = "1.9.2"
 }
 
 object KotlinLibraries {
@@ -115,9 +117,13 @@ object TestLibraries {
     val atslJunit = "androidx.test.ext:junit:${Versions.atsl}"
     val atslRunner = "androidx.test:runner:${Versions.atsl}"
     val atslRules = "androidx.test:rules:${Versions.atsl}"
+    val fragmentTest = "androidx.fragment:fragment-testing:${Versions.fragmentTest}"
     // MOCKITO
     val mockCore = "org.mockito:mockito-core:${Versions.mockito}"
     val mockAndroid = "org.mockito:mockito-android:${Versions.mockito}"
+    // MOCKK
+    val mockkCore = "io.mockk:mockk:${Versions.mockk}"
+    val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
     // MOCK WEBSERVER
     val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 

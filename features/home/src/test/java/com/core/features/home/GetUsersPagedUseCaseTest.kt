@@ -5,15 +5,14 @@ import com.core.common.test.BaseTest
 import com.core.domain.User
 import com.core.domain.repository.UserRepository
 import com.core.features.home.usecase.GetUsersPagedUseCase
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
 import io.reactivex.Maybe
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.Mock
-import org.mockito.Mockito.*
 
 class GetUsersPagedUseCaseTest : BaseTest() {
 
-    @Mock
+    @MockK
     lateinit var userRepository: UserRepository
 
     private lateinit var useCase: GetUsersPagedUseCase
@@ -40,18 +39,15 @@ class GetUsersPagedUseCaseTest : BaseTest() {
 
     @Test
     fun `retrieve users from server, fill two pages and check that duplicates are removed`() {
-        `when`(userRepository.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-            .thenReturn(Maybe.just(userList))
+        every { userRepository.list(1, 100) } returns Maybe.just(userList)
+        every { userRepository.list(2, 100) } returns Maybe.just(userListWithDuplicates)
 
-        val pager = Pager<User>(1, 10)
+        val pager = Pager<User>(1, 100)
 
         useCase.execute(pager)
             .test()
             .assertNoErrors()
             .assertValue { it.getAllData() == userList }
-
-        `when`(userRepository.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-            .thenReturn(Maybe.just(userListWithDuplicates))
 
         pager.next()
 

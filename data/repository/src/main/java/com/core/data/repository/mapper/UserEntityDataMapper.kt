@@ -35,7 +35,6 @@ class UserEntityDataMapper @Inject constructor() : DataMapper<UserEntity, User>(
             source.location?.state ?: ""
         ),
         registered = source.registered?.date?.toLocalDateTime("yyyy-MM-dd HH:mm:ss")
-            ?: LocalDateTime.now()
     )
 
     override fun inverse(source: User): UserEntity = UserEntity()

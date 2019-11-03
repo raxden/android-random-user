@@ -6,6 +6,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.core.common.test.BaseTest
 import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 abstract class BaseLocalTest: BaseTest() {
 
     protected lateinit var database: AppDatabase
@@ -14,7 +15,7 @@ abstract class BaseLocalTest: BaseTest() {
         super.setUp()
 
         database = Room
-            .inMemoryDatabaseBuilder(getContext(), AppDatabase::class.java)
+            .inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java)
             // allowing main thread queries, just for testing
             .allowMainThreadQueries()
             .build()

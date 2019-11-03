@@ -8,20 +8,17 @@ import com.core.data.remote.entity.LoginEntity
 import com.core.data.remote.entity.UserEntity
 import com.core.data.repository.mapper.UserEntityDataMapper
 import com.core.domain.User
-import com.jakewharton.threetenabp.AndroidThreeTen
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
 import io.reactivex.Single
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
 
 class UserRepositoryTest : BaseTest() {
 
-    @Mock
+    @MockK
     lateinit var userDataSource: UserDataSource
-    @Mock
+    @MockK
     lateinit var excludedUserDao: ExcludedUserDao
 
     private var userEntityList = listOf(
@@ -43,14 +40,13 @@ class UserRepositoryTest : BaseTest() {
     override fun setUp() {
         super.setUp()
 
-        AndroidThreeTen.init(getContext())
         userRepository = UserRepositoryImpl(userDataSource, excludedUserDao, UserEntityDataMapper())
     }
 
     @Test
     fun `Get users from server and check that duplicates and excluded users were removed`() {
-        `when`(userDataSource.users(anyInt(), anyInt())).thenReturn(Single.just(userEntityList))
-        `when`(excludedUserDao.findAll()).thenReturn(Single.just(excludedUserList))
+        every { userDataSource.users(1, 100) } returns Single.just(userEntityList)
+        every { excludedUserDao.findAll() } returns Single.just(excludedUserList)
 
         userRepository.list(1, 100)
             .test()
@@ -62,8 +58,8 @@ class UserRepositoryTest : BaseTest() {
 
     @Test
     fun `Get empty users from server and check that completed is called`() {
-        `when`(userDataSource.users(anyInt(), anyInt())).thenReturn(Single.just(emptyList()))
-        `when`(excludedUserDao.findAll()).thenReturn(Single.just(excludedUserList))
+        every { userDataSource.users(1, 100) } returns Single.just(emptyList())
+        every { excludedUserDao.findAll() } returns Single.just(excludedUserList)
 
         userRepository.list(1, 100)
             .test()
