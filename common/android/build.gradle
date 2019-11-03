@@ -10,6 +10,7 @@ android {
 dependencies {
     api KotlinLibraries.kotlin
     api AndroidLibraries.material
+    api AndroidLibraries.swiperefreshlayout
 
     api Libraries.rxAndroid
     api Libraries.rxKotlin

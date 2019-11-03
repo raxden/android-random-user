@@ -45,7 +45,8 @@ object Versions {
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
     val glide = "4.9.0"                     // https://github.com/bumptech/glide
     val constraintLayout = "1.1.3"
-    val material = "1.1.0-alpha07"
+    val swiperefreshlayout = "1.0.0"        // https://developer.android.com/jetpack/androidx/releases/swiperefreshlayout
+    val material = "1.1.0-beta01"
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.3.0"
     val fragmentTest = "1.1.0"
@@ -62,6 +63,7 @@ object AndroidLibraries {
     // ANDROID
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val material = "com.google.android.material:material:${Versions.material}"
+    val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
 }
 
 object Libraries {
