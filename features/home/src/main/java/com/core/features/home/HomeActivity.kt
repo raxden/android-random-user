@@ -33,14 +33,14 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putBoolean(FilterBottomSheetDialog::class.java.simpleName, true)
+        outState.putBoolean(FilterBottomSheetDialog::class.java.simpleName, filterDialog?.isShowing == true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         savedInstanceState?.getBoolean(FilterBottomSheetDialog::class.java.simpleName)?.let {
-            showFilterView()
+            if (it) showFilterView()
         }
     }
 
