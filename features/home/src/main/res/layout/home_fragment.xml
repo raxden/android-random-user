@@ -52,8 +52,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/swipe_refresh_layout"
+            app:layout_constraintVertical_bias="0.41000003"
             app:srcCompat="@drawable/ic_info_outline_black_24dp"
-            bind:visibleGone="@{safeUnbox(viewModel.users.status == Status.SUCCESS) &amp;&amp; safeUnbox(viewModel.users.data.isEmpty())}"
+            bind:visibleGone="@{safeUnbox(viewModel.users.status == Status.SUCCESS) &amp;&amp; safeUnbox(viewModel.users.data.isEmpty()) || safeUnbox(viewModel.users.status == Status.ERROR) &amp;&amp; safeUnbox(viewModel.users.data.isEmpty())}"
             tools:visibility="gone" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -65,7 +66,7 @@
             app:layout_constraintEnd_toEndOf="@+id/info_empty_view"
             app:layout_constraintStart_toStartOf="@+id/info_empty_view"
             app:layout_constraintTop_toBottomOf="@+id/info_empty_view"
-            bind:visibleGone="@{safeUnbox(viewModel.users.status == Status.SUCCESS) &amp;&amp; safeUnbox(viewModel.users.data.isEmpty())}"
+            bind:visibleGone="@{safeUnbox(viewModel.users.status == Status.SUCCESS) &amp;&amp; safeUnbox(viewModel.users.data.isEmpty()) || safeUnbox(viewModel.users.status == Status.ERROR) &amp;&amp; safeUnbox(viewModel.users.data.isEmpty())}"
             tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

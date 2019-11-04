@@ -119,7 +119,7 @@ class HomeFragmentTest {
     @Test
     fun testRefreshWhenError() {
         every { homeViewModel.refreshContent() } answers {
-            users.postValue(Resource.error(Exception("no_internet"), FakeModelData.users))
+            users.postValue(Resource.error(Exception("no_internet"), emptyList()))
         }
 
         onView(withId(R.id.swipe_refresh_layout)).perform(ViewActions.swipeDown())
@@ -127,6 +127,8 @@ class HomeFragmentTest {
         onView(withText(R.string.home_error_to_retrieve_users))
             .inRoot(RootMatchers.withDecorView(not(`is`(fragment.activity?.window?.decorView))))
             .check(matches(isDisplayed()))
+        onView(withId(R.id.info_empty_view)).check(matches(isDisplayed()))
+        onView(withId(R.id.info_empty_text_view)).check(matches(isDisplayed()))
     }
 
     @Test
