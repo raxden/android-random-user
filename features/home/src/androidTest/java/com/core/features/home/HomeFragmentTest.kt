@@ -136,7 +136,7 @@ class HomeFragmentTest {
         every { homeViewModel.onItemSelected(any()) } answers {
             userSelected.postValue(Event(User("1")))
         }
-        
+
         onView(withId(R.id.recycler_view)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
         )

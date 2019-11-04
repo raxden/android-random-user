@@ -36,7 +36,6 @@ abstract class BaseApplication : Application(),
     override fun onCreate() {
         super.onCreate()
 
-        initCompatVector()
         initDagger()
         initTimber()
     }
@@ -53,10 +52,6 @@ abstract class BaseApplication : Application(),
         broadcastReceiverDispatchingAndroidInjector
 
     // =============== Support methods =============================================================
-
-    private fun initCompatVector() {
-        if (!AndroidUtils.hasLollipop()) AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-    }
 
     private fun initTimber() {
         Timber.plant(when (BuildConfig.DEBUG) {
