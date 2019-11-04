@@ -5,4 +5,8 @@
         <item name="navigationIcon">@drawable/ic_icon_arrow_left_white</item>
     </style>
 
+    <style name="Toolbar.Detail.Title" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

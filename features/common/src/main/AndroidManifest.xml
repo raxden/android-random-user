@@ -1,1 +1,2 @@
-<manifest package="com.core.features.common" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.core.features.common" />
