@@ -67,6 +67,17 @@ class UserRepositoryTest : BaseTest() {
             .assertComplete()
     }
 
+    @Test
+    fun `Get error from server and check that error is called`() {
+        val throwable = Exception("ops!")
+        every { userDataSource.users(1, 100) } returns Single.error(throwable)
+        every { excludedUserDao.findAll() } returns Single.just(excludedUserList)
+
+        userRepository.list(1, 100)
+            .test()
+            .assertError(throwable)
+    }
+
     private fun checkDuplicates(users: List<User>): Boolean {
         return users.groupingBy { it.id }.eachCount().filter { it.value > 1 }.isEmpty()
     }

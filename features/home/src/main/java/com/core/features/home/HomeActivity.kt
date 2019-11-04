@@ -25,8 +25,6 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject
-    lateinit var navigationHelper: NavigationHelper
 
     private var filterDialog: FilterBottomSheetDialog? = null
 
@@ -49,12 +47,6 @@ class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),
         savedInstanceState?.getBoolean(FilterBottomSheetDialog::class.java.simpleName)?.let {
             showFilterView()
         }
-
-        viewModel.userSelected.observe(this, Observer {
-            it.getContentIfNotHandled()?.let { user ->
-                navigationHelper.launchDetail(user)
-            }
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

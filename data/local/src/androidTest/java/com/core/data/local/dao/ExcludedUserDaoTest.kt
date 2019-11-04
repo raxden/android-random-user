@@ -30,4 +30,14 @@ class ExcludedUserDaoTest : BaseLocalTest() {
             .assertNoErrors()
             .assertValue(excludedUsers)
     }
+
+    @Test
+    fun excludeDuplicateUsers() {
+        excludedUserDao.insert(*excludedUsers.toTypedArray()).blockingAwait()
+        excludedUserDao.insert(*excludedUsers.toTypedArray()).blockingAwait()
+        excludedUserDao.findAll()
+            .test()
+            .assertNoErrors()
+            .assertValue(excludedUsers)
+    }
 }

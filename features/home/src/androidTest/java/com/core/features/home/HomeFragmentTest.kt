@@ -8,8 +8,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.RootMatchers
@@ -17,14 +19,16 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.core.common.android.Event
 import com.core.common.android.Resource
+import com.core.common.test.espresso.MyViewAction
 import com.core.common.test.espresso.RecyclerViewItemCountAssertion.Companion.withItemCount
 import com.core.domain.User
 import com.core.features.home.model.UserModel
+import com.core.navigation.NavigationHelper
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.not
+import io.mockk.verify
+import org.hamcrest.CoreMatchers.*
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,7 +51,10 @@ class HomeFragmentTest {
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @RelaxedMockK
+    lateinit var navigationHelper: NavigationHelper
+    @RelaxedMockK
     lateinit var homeViewModel: HomeViewModel
+
     private lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val throwable = MutableLiveData<Throwable>()
@@ -76,6 +83,7 @@ class HomeFragmentTest {
                 override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
                     val fragmentInstance = super.instantiate(classLoader, className)
                     (fragmentInstance as HomeFragment).viewModelFactory = viewModelFactory
+                    fragmentInstance.navigationHelper = navigationHelper
                     return fragmentInstance
                 }
             }
@@ -122,12 +130,34 @@ class HomeFragmentTest {
     }
 
     @Test
+    fun testSelectItem() {
+        users.postValue(Resource.success(FakeModelData.users))
+
+        every { homeViewModel.onItemSelected(any()) } answers {
+            userSelected.postValue(Event(User("1")))
+        }
+        
+        onView(withId(R.id.recycler_view)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
+        )
+
+        verify(exactly = 1) { navigationHelper.launchDetail(any()) }
+    }
+
+    @Test
     fun testRemoveItemWhenError() {
+        users.postValue(Resource.success(FakeModelData.users))
+
         every { homeViewModel.onItemRemoved(any()) } answers {
             throwable.postValue(Exception("Ha ocurrido un error"))
         }
 
-        onView(withId(R.id.swipe_refresh_layout)).perform(ViewActions.swipeDown())
+        onView(withId(R.id.recycler_view)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                MyViewAction.clickChildViewWithId(R.id.removeView)
+            )
+        )
 
         onView(withText(R.string.home_error_unknown_title)).check(matches(isDisplayed()))
     }

@@ -16,6 +16,7 @@ import com.core.features.home.adapter.HomeListAdapter
 import com.core.features.home.databinding.HomeFragmentBinding
 import com.core.features.home.model.UserModel
 import com.core.fragment.BaseViewFragment
+import com.core.navigation.NavigationHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,6 +25,8 @@ class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var navigationHelper: NavigationHelper
 
     private val viewModel: HomeViewModel by lazy {
         ViewModelProvider(activity!!, viewModelFactory).get(HomeViewModel::class.java)
@@ -65,6 +68,11 @@ class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {
                 .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
+        })
+        viewModel.userSelected.observe(this, Observer {
+            it.getContentIfNotHandled()?.let { user ->
+                navigationHelper.launchDetail(user)
+            }
         })
         viewModel.users.observe(viewLifecycleOwner, Observer {
             when (it.status) {

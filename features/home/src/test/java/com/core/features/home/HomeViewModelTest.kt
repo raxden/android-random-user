@@ -211,7 +211,7 @@ class HomeViewModelTest : BaseTest() {
         homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
             users.observeForever(usersObserver)
             throwable.observeForever(throwableObserver)
-            name.observeForever(emailObserver)
+            name.observeForever(nameObserver)
         }
 
         homeViewModel.name.postValue("a")
@@ -221,17 +221,95 @@ class HomeViewModelTest : BaseTest() {
         verifyOrder {
             usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
             usersObserver.onChanged(Resource.success(
-                FakeUserData.users.filter { it.name.startsWith("a") }.map { item ->
+                FakeUserData.users.filter { it.name.toLowerCase().startsWith("a") }.map { item ->
                     UserModel(item)
                 }
             ))
             usersObserver.onChanged(Resource.success(
-                FakeUserData.users.filter { it.name.startsWith("aa") }.map { item ->
+                FakeUserData.users.filter { it.name.toLowerCase().startsWith("aa") }.map { item ->
                     UserModel(item)
                 }
             ))
             usersObserver.onChanged(Resource.success(
-                FakeUserData.users.filter { it.name.startsWith("aaa") }.map { item ->
+                FakeUserData.users.filter { it.name.toLowerCase().startsWith("aaa") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
+    }
+
+    @Test
+    fun `filter results by surname, letter to letter`() {
+        val pager = Pager<User>(1, 10)
+        pager.addPageData(data = FakeUserData.users)
+
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
+
+        homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
+            users.observeForever(usersObserver)
+            throwable.observeForever(throwableObserver)
+            surname.observeForever(surnameObserver)
+        }
+
+        homeViewModel.surname.postValue("a")
+        homeViewModel.surname.postValue("aa")
+        homeViewModel.surname.postValue("aaa")
+
+        verifyOrder {
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(
+                FakeUserData.users.filter { it.surname.toLowerCase().startsWith("a") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            usersObserver.onChanged(Resource.success(
+                FakeUserData.users.filter { it.surname.toLowerCase().startsWith("aa") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            usersObserver.onChanged(Resource.success(
+                FakeUserData.users.filter { it.surname.toLowerCase().startsWith("aaa") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            throwableObserver wasNot Called
+        }
+        confirmVerified(usersObserver)
+    }
+
+    @Test
+    fun `filter results by email, letter to letter`() {
+        val pager = Pager<User>(1, 10)
+        pager.addPageData(data = FakeUserData.users)
+
+        every { getUsersPagedUseCase.execute(any()) } returns Single.just(pager)
+
+        homeViewModel = HomeViewModel(getUsersPagedUseCase, excludeUserUseCase).apply {
+            users.observeForever(usersObserver)
+            throwable.observeForever(throwableObserver)
+            email.observeForever(emailObserver)
+        }
+
+        homeViewModel.email.postValue("a")
+        homeViewModel.email.postValue("aa")
+        homeViewModel.email.postValue("aaa")
+
+        verifyOrder {
+            usersObserver.onChanged(Resource.success(FakeUserData.users.map { item -> UserModel(item) }))
+            usersObserver.onChanged(Resource.success(
+                FakeUserData.users.filter { it.email.toLowerCase().startsWith("a") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            usersObserver.onChanged(Resource.success(
+                FakeUserData.users.filter { it.email.toLowerCase().startsWith("aa") }.map { item ->
+                    UserModel(item)
+                }
+            ))
+            usersObserver.onChanged(Resource.success(
+                FakeUserData.users.filter { it.email.toLowerCase().startsWith("aaa") }.map { item ->
                     UserModel(item)
                 }
             ))
