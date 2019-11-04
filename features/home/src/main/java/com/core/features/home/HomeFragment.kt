@@ -1,9 +1,7 @@
 package com.core.features.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +16,6 @@ import com.core.features.home.model.UserModel
 import com.core.fragment.BaseViewFragment
 import com.core.navigation.NavigationHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import timber.log.Timber
 import javax.inject.Inject
 
 class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {

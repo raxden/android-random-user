@@ -2,7 +2,6 @@ package com.core.data.remote
 
 import com.core.data.remote.entity.ErrorEntity
 import com.core.data.remote.retrofit.exception.RetrofitException
-import okhttp3.mockwebserver.MockResponse
 import org.junit.Test
 import java.net.HttpURLConnection
 

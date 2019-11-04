@@ -1,15 +1,11 @@
 package com.core.fragment
 
 import android.content.Context
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleObserver
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * Abstract (Dialog)Fragment for all (Dialog)Fragments and child (Dialog)Fragments to extend.

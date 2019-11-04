@@ -2,7 +2,6 @@ package com.core.common.android.extensions
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
 
 interface OnPageEndlessListener {
     fun onPageEndless()

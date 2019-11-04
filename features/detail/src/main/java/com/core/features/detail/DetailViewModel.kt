@@ -1,12 +1,10 @@
 package com.core.features.detail
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.BaseViewModel
 import com.core.domain.User
 import com.core.features.detail.model.UserDetailModel
-import io.reactivex.Single
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(

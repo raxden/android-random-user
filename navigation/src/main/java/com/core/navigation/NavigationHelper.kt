@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import com.core.domain.User
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class NavigationHelper @Inject internal constructor(
     private val activity: Activity

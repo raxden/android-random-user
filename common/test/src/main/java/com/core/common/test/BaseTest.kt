@@ -6,8 +6,6 @@ import io.mockk.MockKAnnotations
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
 import timber.log.Timber
 
 abstract class BaseTest {

@@ -1,22 +1,17 @@
 package com.core.features.home
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.core.activity.BaseFragmentActivity
 import com.core.common.android.extensions.getExtras
 import com.core.features.home.databinding.HomeActivityBinding
 import com.core.features.home.view.FilterBottomSheetDialog
-import com.core.features.home.view.FilterView
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.lifecycle.activity.ToolbarActivityLifecycle
-import com.core.navigation.NavigationHelper
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
 class HomeActivity : BaseFragmentActivity<HomeActivityBinding>(),

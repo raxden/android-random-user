@@ -2,7 +2,7 @@ package com.core.common.android
 
 import java.util.*
 
-abstract class DataMapper<E, T>() {
+abstract class DataMapper<E, T> {
 
     /**
      * Transform a [E] into an [T].

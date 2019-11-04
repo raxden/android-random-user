@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.core.activity.BaseFragmentActivity
 import com.core.common.android.extensions.getExtras
+import com.core.common.android.extensions.getParcelable
 import com.core.domain.User
 import com.core.features.detail.databinding.DetailActivityBinding
 import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
@@ -29,9 +30,7 @@ class DetailActivity : BaseFragmentActivity<DetailActivityBinding>(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getExtras()?.getParcelable<User>(User::class.java.name)?.let {
-            viewModel.setUser(it)
-        }
+        getParcelable<User>(User::class.java.name)?.let { viewModel.setUser(it) }
     }
 
     override fun onBindingCreated(binding: DetailActivityBinding) {

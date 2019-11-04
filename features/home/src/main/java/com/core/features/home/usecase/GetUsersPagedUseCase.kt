@@ -3,9 +3,7 @@ package com.core.features.home.usecase
 import com.core.common.android.Pager
 import com.core.domain.User
 import com.core.domain.repository.UserRepository
-import io.reactivex.Maybe
 import io.reactivex.Single
-import timber.log.Timber
 import javax.inject.Inject
 
 class GetUsersPagedUseCase @Inject constructor(

@@ -7,7 +7,6 @@ import com.core.domain.Gender
 import com.core.domain.Picture
 import com.core.domain.Location
 import com.core.domain.User
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 import javax.inject.Singleton

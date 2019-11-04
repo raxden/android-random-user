@@ -5,13 +5,10 @@ import android.app.Application
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.core.common.android.AndroidUtils
 import com.core.util.CrashReportingTree
 import dagger.android.*
 import dagger.android.support.AndroidSupportInjection
