@@ -17,9 +17,4 @@ class NavigationHelper @Inject internal constructor(
         }
         activity.startActivity(intent)
     }
-
-    fun launchEmail(email: String) {
-        val intent = Intent(Intent.ACTION_SENDTO)
-        activity.startActivity(intent)
-    }
 }
