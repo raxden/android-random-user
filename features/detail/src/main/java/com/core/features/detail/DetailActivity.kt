@@ -1,21 +1,18 @@
 package com.core.features.detail
 
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.core.activity.BaseFragmentActivity
 import com.core.common.android.extensions.getExtras
-import com.core.common.android.extensions.getParcelable
+import com.core.common.android.extensions.loadParcelable
+import com.core.common.android.extensions.loadFragment
+import com.core.common.android.extensions.setupToolbar
 import com.core.domain.User
 import com.core.features.detail.databinding.DetailActivityBinding
-import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
-import com.core.lifecycle.activity.ToolbarActivityLifecycle
+import kotlinx.android.synthetic.main.detail_activity.*
 import javax.inject.Inject
 
-class DetailActivity : BaseFragmentActivity<DetailActivityBinding>(),
-    ToolbarActivityLifecycle.Callback,
-    InjectFragmentActivityLifecycle.Callback<DetailFragment> {
+class DetailActivity : BaseFragmentActivity<DetailActivityBinding>() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -30,7 +27,9 @@ class DetailActivity : BaseFragmentActivity<DetailActivityBinding>(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getParcelable<User>(User::class.java.name)?.let { viewModel.setUser(it) }
+        setupToolbar(toolbar_view)
+        loadFragment(content_view, savedInstanceState) { DetailFragment.newInstance(getExtras()) }
+        loadParcelable<User>(User::class.java.name)?.let { viewModel.setUser(it) }
     }
 
     override fun onBindingCreated(binding: DetailActivityBinding) {
@@ -42,18 +41,4 @@ class DetailActivity : BaseFragmentActivity<DetailActivityBinding>(),
         super.finish()
         overridePendingTransition(0, 0)
     }
-
-    // =============== ToolbarActivityLifecycle ====================================================
-
-    override fun onCreateToolbarView(): Toolbar = binding.toolbarView
-
-    override fun onToolbarViewCreated(toolbar: Toolbar) {}
-
-    // =============== InjectFragmentActivityLifecycle =============================================
-
-    override fun onLoadFragmentContainer(): View = binding.contentView
-
-    override fun onCreateFragment(): DetailFragment = DetailFragment.newInstance(getExtras())
-
-    override fun onFragmentLoaded(fragment: DetailFragment) {}
 }

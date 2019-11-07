@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.core.common.android.Status
 import com.core.common.android.extensions.OnPageEndlessListener
+import com.core.common.android.extensions.observe
+import com.core.common.android.extensions.observeEvent
 import com.core.common.android.extensions.setOnPageEndlessListener
 import com.core.features.home.adapter.HomeListAdapter
 import com.core.features.home.databinding.HomeFragmentBinding
@@ -58,27 +60,23 @@ class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.throwable.observe(viewLifecycleOwner, Observer {
+        observe(viewModel.throwable) {
             MaterialAlertDialogBuilder(activity)
                 .setTitle(R.string.home_error_unknown_title)
                 .setMessage(R.string.home_error_unknown_message)
                 .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
-        })
-        viewModel.userSelected.observe(this, Observer {
-            it.getContentIfNotHandled()?.let { user ->
-                navigationHelper.launchDetail(user)
-            }
-        })
-        viewModel.users.observe(viewLifecycleOwner, Observer {
+        }
+        observe(viewModel.users) {
             when (it.status) {
                 Status.ERROR -> Toast
                     .makeText(context, R.string.home_error_to_retrieve_users, Toast.LENGTH_LONG)
                     .show()
                 else -> homeListAdapter.submitList(it.data?.toList())
             }
-        })
+        }
+        observeEvent(viewModel.userSelected) { navigationHelper.launchDetail(it) }
     }
 
     companion object {
