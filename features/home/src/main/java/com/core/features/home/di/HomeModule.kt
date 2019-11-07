@@ -1,21 +1,17 @@
 package com.core.features.home.di
 
 import android.app.Activity
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import com.core.common.dagger.ViewModelKey
 import com.core.activity.BaseActivityModule
 import com.core.features.home.HomeActivity
 import com.core.features.home.HomeFragment
 import com.core.features.home.HomeViewModel
-import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
-import com.core.lifecycle.activity.ToolbarActivityLifecycle
 import com.core.navigation.NavigationModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import dagger.multibindings.IntoSet
 
 @Module
 abstract class HomeModule {
@@ -28,18 +24,6 @@ abstract class HomeModule {
 
         @Binds
         internal abstract fun activity(activity: HomeActivity): Activity
-
-        @Binds
-        @IntoSet
-        internal abstract fun injectFragment(
-            lifecycleObserver: InjectFragmentActivityLifecycle<HomeFragment>
-        ): LifecycleObserver
-
-        @Binds
-        @IntoSet
-        internal abstract fun toolbar(
-            lifecycleObserver: ToolbarActivityLifecycle
-        ): LifecycleObserver
 
         @Binds
         @IntoMap

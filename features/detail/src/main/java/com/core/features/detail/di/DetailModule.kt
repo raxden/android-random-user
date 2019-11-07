@@ -1,20 +1,16 @@
 package com.core.features.detail.di
 
 import android.app.Activity
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import com.core.common.dagger.ViewModelKey
 import com.core.activity.BaseActivityModule
 import com.core.features.detail.DetailActivity
 import com.core.features.detail.DetailFragment
 import com.core.features.detail.DetailViewModel
-import com.core.lifecycle.activity.InjectFragmentActivityLifecycle
-import com.core.lifecycle.activity.ToolbarActivityLifecycle
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import dagger.multibindings.IntoSet
 
 @Module
 abstract class DetailModule {
@@ -27,18 +23,6 @@ abstract class DetailModule {
 
         @Binds
         internal abstract fun activity(activity: DetailActivity): Activity
-
-        @Binds
-        @IntoSet
-        internal abstract fun injectFragment(
-            lifecycleObserver: InjectFragmentActivityLifecycle<DetailFragment>
-        ): LifecycleObserver
-
-        @Binds
-        @IntoSet
-        internal abstract fun toolbar(
-            lifecycleObserver: ToolbarActivityLifecycle
-        ): LifecycleObserver
 
         @Binds
         @IntoMap
