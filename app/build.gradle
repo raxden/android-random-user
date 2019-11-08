@@ -5,9 +5,6 @@ android {
     defaultConfig {
         applicationId ApplicationId.id
     }
-    dataBinding {
-        enabled true
-    }
 }
 
 dependencies {
@@ -21,6 +18,8 @@ dependencies {
 
     implementation project(Modules.featureHome)
     implementation project(Modules.featureDetail)
+
+    debugImplementation Libraries.leakcanary
 
     // DAGGER
     implementation Libraries.daggerAndroid

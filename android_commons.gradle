@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion Versions.compileSdk
+
     defaultConfig {
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
@@ -12,13 +13,16 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildTypes {
         debug {
             minifyEnabled false
@@ -27,9 +31,15 @@ android {
             minifyEnabled false
         }
     }
+
+    dataBinding {
+        enabled true
+    }
+
     androidExtensions {
         experimental = true
     }
+
     testOptions {
         // https://developer.android.com/training/testing/unit-testing/local-unit-tests#include-framework-dependencies
         unitTests.includeAndroidResources = true

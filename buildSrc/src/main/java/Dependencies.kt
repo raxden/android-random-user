@@ -53,6 +53,7 @@ object Versions {
     val mockk = "1.9.2"
     val databinding = "3.3.2"
     val espressoCore = "3.1.0"
+    val leakcanary = "2.0-beta-3"
 }
 
 object KotlinLibraries {
@@ -98,6 +99,9 @@ object Libraries {
 
     // Threetenabp
     val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
+
+    // Leakcanary
+    val leakcanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
 }
 
 object TestLibraries {

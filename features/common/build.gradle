@@ -1,12 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: '../../android_commons.gradle'
 
-android {
-    dataBinding {
-        enabled true
-    }
-}
-
 dependencies {
     implementation project(Modules.core)
 }
