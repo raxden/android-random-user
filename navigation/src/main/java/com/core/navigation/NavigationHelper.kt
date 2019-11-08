@@ -13,6 +13,7 @@ class NavigationHelper @Inject internal constructor(
     fun launchDetail(user: User) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("app://randomuser/detail")).apply {
             putExtra(User::class.java.name, user)
+            setPackage(activity.packageName)
         }
         activity.startActivity(intent)
     }
