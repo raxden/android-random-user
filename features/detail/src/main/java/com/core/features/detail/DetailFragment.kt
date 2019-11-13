@@ -15,7 +15,7 @@ class DetailFragment: BaseViewFragment<DetailFragmentBinding>() {
     lateinit var navigationHelper: NavigationHelper
 
     private val viewModel: DetailViewModel by lazy {
-        ViewModelProvider(activity!!, viewModelFactory).get(DetailViewModel::class.java)
+        ViewModelProvider(requireActivity(), viewModelFactory).get(DetailViewModel::class.java)
     }
 
     override val layoutId: Int

@@ -28,7 +28,7 @@ class HomeFragment : BaseViewFragment<HomeFragmentBinding>() {
     lateinit var navigationHelper: NavigationHelper
 
     private val viewModel: HomeViewModel by lazy {
-        ViewModelProvider(activity!!, viewModelFactory).get(HomeViewModel::class.java)
+        ViewModelProvider(requireActivity(), viewModelFactory).get(HomeViewModel::class.java)
     }
 
     private lateinit var homeListAdapter: HomeListAdapter
